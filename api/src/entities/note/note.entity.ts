@@ -6,6 +6,7 @@ import {
   UpdateDateColumn,
   ManyToOne,
 } from 'typeorm';
+import { Field, ID, ObjectType } from '@nestjs/graphql';
 import { User } from '../user/user.entity';
 import { NoteSource } from './note-source.entity';
 
@@ -18,41 +19,53 @@ export enum NoteStatus {
   INTERVIEW = 'INTERVIEW',
 }
 
+@ObjectType()
 @Entity()
 export class Note {
+  @Field(type => ID)
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Field()
   @Column()
   userId: number;
 
+  @Field(type => User)
   @ManyToOne(() => User, { onDelete: 'CASCADE' })
   user: User;
 
+  @Field()
   @Column()
   sourceId: number;
 
+  @Field(type => NoteSource)
   @ManyToOne(() => NoteSource, { onDelete: 'CASCADE' })
   source: NoteSource;
 
+  @Field()
   @Column({ type: 'varchar', length: 128 })
   position: string;
 
+  @Field()
   @Column({ type: 'varchar', length: 128 })
   company: string;
 
   @Column({ type: 'varchar', length: 256 })
   link: string;
 
+  @Field()
   @Column({ type: 'text', nullable: true })
   description: string;
 
+  @Field()
   @Column({ type: 'enum', enum: NoteStatus, default: NoteStatus.SENT })
   status: NoteStatus;
 
+  @Field()
   @CreateDateColumn()
   createdAt: Date;
 
+  @Field()
   @UpdateDateColumn()
   updatedAt: Date;
 }
