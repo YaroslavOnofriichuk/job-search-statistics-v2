@@ -14,8 +14,10 @@ export class NotesResolver {
   }
 
   @Query(() => [Note], { name: 'notes' })
-  findAll() {
-    return this.notesService.findAll();
+  findAll(
+    @Args('page', { type: () => Int, nullable: true }) page: number, 
+    @Args('limit', { type: () => Int, nullable: true  }) limit: number) {
+    return this.notesService.findAll(page, limit);
   }
 
   @Query(() => Note, { name: 'note' })

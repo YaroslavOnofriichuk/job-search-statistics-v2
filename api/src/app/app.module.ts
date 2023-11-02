@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
-import { configuration, dbConf } from '../config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { dbConf } from '../config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
@@ -10,9 +10,13 @@ import { NotesModule } from './modules/notes/notes.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      load: [configuration],
+      isGlobal: true,
+      load: [dbConf]
     }),
-    TypeOrmModule.forRoot(dbConf),
+    TypeOrmModule.forRootAsync({
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => (configService.get('typeorm'))
+    }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       playground: true,

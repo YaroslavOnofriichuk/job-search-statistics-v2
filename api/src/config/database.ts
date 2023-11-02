@@ -1,23 +1,27 @@
-import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
-import { User } from '../entities/user/user.entity';
-import { UserSubscriber } from '../entities/user/user.subscriber';
-import { Note } from '../entities/note/note.entity';
-import { NoteSource } from '../entities/note/note-source.entity';
-import { NoteStatusHistory } from '../entities/note/note-status-history.entity';
-import { Tag } from '../entities/tag/tag.entity';
-import { NoteTag } from '../entities/note/note-tag.entity';
-import { join } from 'path';
+import { registerAs } from "@nestjs/config";
+import { DataSource, DataSourceOptions } from "typeorm";
+import { config as dotenvConfig } from 'dotenv';
 
-export const dbConf: PostgresConnectionOptions = {
+dotenvConfig({ path: '.env' });
+
+const config = {
   type: 'postgres',
   host: process.env.DB_HOST,
   port: parseInt(process.env.DB_PORT, 10),
   username: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  entities: [User, Note, NoteSource, NoteStatusHistory, Tag, NoteTag],
-  subscribers: [UserSubscriber],
-  migrations: [join(process.cwd(), 'migrations', '*.js')],
+  entities: ["dist/**/*.entity{.ts,.js}"],
+  subscribers: ["dist/**/*.subscriber{.ts,.js}"],
+  migrations: ["dist/migrations/*-migrations.js"],
+  cli: {
+    migrationsDir: "dist/migrations"
+  },
+  autoLoadEntities: true,
   synchronize: false,
-  logging: true,
-};
+  migrationsRun: true,
+  logging: ['error', 'warn', 'migration', 'connect'],
+}
+
+export const dbConf = registerAs('typeorm', () => config)
+export const dataSource = new DataSource(config as DataSourceOptions);

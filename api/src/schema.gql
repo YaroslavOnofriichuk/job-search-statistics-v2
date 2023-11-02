@@ -22,6 +22,24 @@ type NoteSource {
   name: String!
 }
 
+type Tag {
+  id: ID!
+  userId: Float!
+  user: User!
+  tag: String!
+  notes: [NoteTag!]!
+}
+
+type NoteTag {
+  id: ID!
+  userId: Float!
+  user: User!
+  noteId: Float!
+  note: Note!
+  tagId: Float!
+  tag: Tag!
+}
+
 type Note {
   id: ID!
   userId: Float!
@@ -32,12 +50,13 @@ type Note {
   company: String!
   description: String!
   status: String!
+  tags: [NoteTag!]!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
 
 type Query {
-  notes: [Note!]!
+  notes(page: Int, limit: Int): [Note!]!
   note(id: Int!): Note!
 }
 
@@ -48,12 +67,42 @@ type Mutation {
 }
 
 input CreateNoteInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  """Note position"""
+  position: String!
+
+  """Note company"""
+  company: String!
+
+  """Note link"""
+  link: String!
+
+  """Note description"""
+  description: String
+
+  """Note source"""
+  source: String!
+
+  """Note status"""
+  status: String!
 }
 
 input UpdateNoteInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  """Note position"""
+  position: String
+
+  """Note company"""
+  company: String
+
+  """Note link"""
+  link: String
+
+  """Note description"""
+  description: String
+
+  """Note source"""
+  source: String
+
+  """Note status"""
+  status: String
   id: Int!
 }
