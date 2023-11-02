@@ -5,10 +5,12 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToOne,
+  OneToMany,
 } from 'typeorm';
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 import { User } from '../user/user.entity';
 import { NoteSource } from './note-source.entity';
+import { NoteTag } from './note-tag.entity';
 
 export enum NoteStatus {
   ACCEPTED = 'ACCEPTED',
@@ -60,6 +62,10 @@ export class Note {
   @Field()
   @Column({ type: 'enum', enum: NoteStatus, default: NoteStatus.SENT })
   status: NoteStatus;
+
+  @Field(type => [NoteTag])
+  @OneToMany(() => NoteTag, ({note}) => note)
+  tags: NoteTag[];
 
   @Field()
   @CreateDateColumn()
