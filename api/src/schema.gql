@@ -55,9 +55,60 @@ type Note {
   updatedAt: DateTime!
 }
 
+type NotesPaginationResponse {
+  """List of notes"""
+  notes: [Note!]!
+
+  """Total number of items"""
+  totalItems: Int
+
+  """Total number of pages"""
+  totalPages: Int
+
+  """Current page number"""
+  currentPage: Int
+
+  """Number of items per page"""
+  limit: Int
+
+  """Previous page number"""
+  prevPage: Int
+
+  """Next page number"""
+  nextPage: Int
+}
+
 type Query {
-  notes(page: Int, limit: Int): [Note!]!
+  notes(getNotesArgs: GetNotesArgs!): NotesPaginationResponse!
   note(id: Int!): Note!
+}
+
+input GetNotesArgs {
+  """Page"""
+  page: Int
+
+  """Limit"""
+  limit: Int
+
+  """Sort"""
+  sort: String
+
+  """Filters"""
+  filters: Filters
+}
+
+input Filters {
+  """Note position"""
+  position: String
+
+  """Note company"""
+  company: String
+
+  """Note description"""
+  description: String
+
+  """Note status"""
+  status: String
 }
 
 type Mutation {
@@ -83,7 +134,13 @@ input CreateNoteInput {
   source: String!
 
   """Note status"""
-  status: String!
+  status: String
+
+  """Note created at"""
+  createdAt: DateTime
+
+  """Note tags"""
+  tags: [Int!]
 }
 
 input UpdateNoteInput {
@@ -104,5 +161,11 @@ input UpdateNoteInput {
 
   """Note status"""
   status: String
-  id: Int!
+
+  """Note created at"""
+  createdAt: DateTime
+
+  """Note tags"""
+  tags: [Int!]
+  id: ID!
 }

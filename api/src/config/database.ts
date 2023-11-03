@@ -20,7 +20,7 @@ const config = {
   autoLoadEntities: true,
   synchronize: false,
   migrationsRun: true,
-  logging: ['error', 'warn', 'migration', 'connect'],
+  logging: true,
 }
 
 export const dbConf = registerAs('typeorm', () => config)

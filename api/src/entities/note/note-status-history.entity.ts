@@ -26,7 +26,7 @@ export class NoteStatusHistory {
 
   @Field()
   @Column()
-  noterId: number;
+  noteId: number;
 
   @Field(type => Note)
   @ManyToOne(() => Note, { onDelete: 'CASCADE' })

@@ -24,7 +24,7 @@ export enum NoteStatus {
 @ObjectType()
 @Entity()
 export class Note {
-  @Field(type => ID)
+  @Field(() => ID)
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -32,7 +32,7 @@ export class Note {
   @Column()
   userId: number;
 
-  @Field(type => User)
+  @Field(() => User)
   @ManyToOne(() => User, { onDelete: 'CASCADE' })
   user: User;
 
@@ -40,7 +40,7 @@ export class Note {
   @Column()
   sourceId: number;
 
-  @Field(type => NoteSource)
+  @Field(() => NoteSource)
   @ManyToOne(() => NoteSource, { onDelete: 'CASCADE' })
   source: NoteSource;
 
@@ -63,7 +63,7 @@ export class Note {
   @Column({ type: 'enum', enum: NoteStatus, default: NoteStatus.SENT })
   status: NoteStatus;
 
-  @Field(type => [NoteTag])
+  @Field(() => [NoteTag])
   @OneToMany(() => NoteTag, ({note}) => note)
   tags: NoteTag[];
 

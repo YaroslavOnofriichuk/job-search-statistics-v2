@@ -7,7 +7,7 @@ import { Tag } from '../tag/tag.entity';
 @ObjectType()
 @Entity()
 export class NoteTag {
-  @Field(type => ID)
+  @Field(() => ID)
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -15,7 +15,7 @@ export class NoteTag {
   @Column()
   userId: number;
 
-  @Field(type => User)
+  @Field(() => User)
   @ManyToOne(() => User, { onDelete: 'CASCADE' })
   user: User;
 
@@ -23,7 +23,7 @@ export class NoteTag {
   @Column()
   noteId: number;
 
-  @Field(type => Note)
+  @Field(() => Note)
   @ManyToOne(() => Note, ({tags}) => tags, { onDelete: 'CASCADE' })
   note: Note;
 
@@ -31,7 +31,7 @@ export class NoteTag {
   @Column()
   tagId: number;
 
-  @Field(type => Tag)
+  @Field(() => Tag)
   @ManyToOne(() => Tag, ({notes}) => notes, { onDelete: 'CASCADE' })
   tag: Tag;
 }

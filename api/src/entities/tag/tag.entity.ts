@@ -6,7 +6,7 @@ import { NoteTag } from '../note/note-tag.entity';
 @ObjectType()
 @Entity()
 export class Tag {
-  @Field(type => ID)
+  @Field(() => ID)
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -14,7 +14,7 @@ export class Tag {
   @Column()
   userId: number;
 
-  @Field(type => User)
+  @Field(() => User)
   @ManyToOne(() => User, { onDelete: 'CASCADE' })
   user: User;
 
@@ -22,7 +22,7 @@ export class Tag {
   @Column({ type: 'varchar', length: 32 })
   tag: string;
 
-  @Field(type => [NoteTag])
+  @Field(() => [NoteTag])
   @OneToMany(() => NoteTag, ({tag}) => tag)
   notes: NoteTag[];
 }

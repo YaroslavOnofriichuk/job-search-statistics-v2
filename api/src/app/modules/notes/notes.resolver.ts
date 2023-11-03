@@ -3,6 +3,8 @@ import { NotesService } from './notes.service';
 import { Note } from '../../../entities/note/note.entity'
 import { CreateNoteInput } from './dto/create-note.input';
 import { UpdateNoteInput } from './dto/update-note.input';
+import { GetNotesArgs } from './dto/get-notes.args';
+import { NotesPaginationResponse } from './response/notes-pagination.response';
 
 @Resolver(() => Note)
 export class NotesResolver {
@@ -13,11 +15,9 @@ export class NotesResolver {
     return this.notesService.create(createNoteInput);
   }
 
-  @Query(() => [Note], { name: 'notes' })
-  findAll(
-    @Args('page', { type: () => Int, nullable: true }) page: number, 
-    @Args('limit', { type: () => Int, nullable: true  }) limit: number) {
-    return this.notesService.findAll(page, limit);
+  @Query(() => NotesPaginationResponse, { name: 'notes' })
+  findAll(@Args('getNotesArgs') getNotesArgs: GetNotesArgs) {
+    return this.notesService.findAll(getNotesArgs);
   }
 
   @Query(() => Note, { name: 'note' })

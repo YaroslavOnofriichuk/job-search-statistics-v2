@@ -1,8 +1,12 @@
 import { CreateNoteInput } from './create-note.input';
-import { InputType, Field, Int, PartialType } from '@nestjs/graphql';
+import { InputType, Field, ID, PartialType } from '@nestjs/graphql';
+import { IsInt, IsNotEmpty, Min } from 'class-validator';
 
 @InputType()
 export class UpdateNoteInput extends PartialType(CreateNoteInput) {
-  @Field(() => Int)
+  @IsNotEmpty()
+  @IsInt()
+  @Min(1)
+  @Field(() => ID)
   id: number;
 }
