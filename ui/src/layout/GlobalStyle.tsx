@@ -13,7 +13,7 @@ export const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
-    background: ${({ theme }) => theme.colors.body};  
+    background: ${({ theme }) => theme.colors.body.primary};  
 
     font-family: 'Oswald', sans-serif;
     font-style: normal;
@@ -21,7 +21,7 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 24px;
     line-height: 1.2;
 
-    color: ${({ theme }) => theme.colors.text};
+    color: ${({ theme }) => theme.colors.text.primary};
     height: 100%;
 
     display: flex;
