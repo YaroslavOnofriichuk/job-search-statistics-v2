@@ -1,19 +1,24 @@
 import { Link } from "./Link";
-import { Header as HeaderStyled } from "./Header";
+import { Header as Head } from "./Header";
 import { config } from "./configNav";
+import { Logo } from "../../components/Logo";
 
-export const Header = () => {
+export const Header = ({ open }: { open: boolean }) => {
     return (
-        <HeaderStyled>
+        <Head open={open}>
             <nav>
+                <div className="logo-wrapper">
+                    <Logo />
+                </div>
+
                 <ul>
                     {config.map((item) => (
                         <li key={item.path}>
-                            <Link path={item.path} icon={item.icon} />
+                            <Link path={item.path} icon={item.icon} open={open} />
                         </li>
                     ))}
                 </ul>
             </nav>
-        </HeaderStyled>
+        </Head>
     );
 };

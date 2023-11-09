@@ -1,7 +1,11 @@
 import styled from "styled-components";
 
-export const Header = styled.header`
-    background-color: ${({ theme }) => theme.colors.body.secondary};
+interface HeaderProps {
+    open: boolean;
+}
+
+export const Header = styled.header<HeaderProps>`
+    background-color: ${props => props.theme.colors.body.primary};
 
     display: flex;
     flex-direction: row;
@@ -9,48 +13,48 @@ export const Header = styled.header`
     justify-content: center;
 
     position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100px;
-    z-index: 1000;
+    left: ${props => (props.open ? "0" : "-108px")};
+    top: 0;
+    width: ${props => (props.open ? "252px" : "108px")};
+    height: 100%;
     overflow: hidden;
 
     transition: .5s;
 
     nav {
         width: 100%;
-        height: 100%;
         display: flex;
+        flex-direction: column;
         align-items: flex-start;
+        justify-content: flex-start;
+    }
+
+    .logo-wrapper {
+        width: 100%;
+        height: 100px;
+        display: flex;
+        align-items: center;
         justify-content: center;
+        border: 3px solid ${props => props.theme.colors.body.secondary};
+        margin-bottom: 34px;
     }
 
     ul {
         display: flex;
-        flex-direction: row;
-        justify-content: space-evenly;
+        flex-direction: column;
+        justify-content: flex-start;
         width: 100%;
 
-        @media (min-width: 767px) {
-            flex-direction: column;
-            align-items: flex-start;
+        li {
+            display: flex;
+            align-items: center;
+            justify-content: center; 
             width: 100%;
-            padding-left: 5px;
-
-            li {
-                margin: 10px 0;
-            }
+            padding: 0 24px;
         }
     }
 
     @media (min-width: 767px) {
-        flex-direction: column;
-        width: 100px;
-        min-height: 100vh;
-
-        &:hover, &:focus {
-            width: 250px;
-        }
+        left: 0;
     }
 `;

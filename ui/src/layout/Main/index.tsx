@@ -1,11 +1,25 @@
-import styled from 'styled-components';
+import { ReactNode } from "react";
+import { Main as Wrapper } from "./Main";
+import { Burger } from "./Burger";
+import { Settings } from "./Settings";
 
-export const Main = styled.main`
-  padding: 20px 10px 70px 10px;
-  width: 100%;
-  overflow: hidden;
+interface MainProps {
+    children: ReactNode;
+    open: boolean;
+    onOpen: () => void;
+    onChangeTheme: () => void;
+}
 
-  @media (min-width: 767px) {
-    padding: 20px 20px 20px 120px;
-  }
-`;
+export const Main = ({ children, open, onOpen, onChangeTheme }: MainProps) => {
+    return (
+        <Wrapper open={open}>
+            <section className="head">
+                <Burger onClick={onOpen} open={open} />
+
+                <Settings onChangeTheme={onChangeTheme} />
+            </section>
+
+            <section className="content">{children}</section>
+        </Wrapper>
+    );
+};

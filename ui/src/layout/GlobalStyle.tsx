@@ -13,7 +13,7 @@ export const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
-    background: ${({ theme }) => theme.colors.body.primary};  
+    background: ${({ theme }) => theme.colors.body.secondary};  
 
     font-family: 'Oswald', sans-serif;
     font-style: normal;
@@ -25,12 +25,6 @@ export const GlobalStyle = createGlobalStyle`
     height: 100%;
 
     display: flex;
-    flex-direction: column-reverse;
-    align-items: stretch;
-
-    @media (min-width: 767px) {
-      flex-direction: row;
-    }
   }
   img {
     display: block;

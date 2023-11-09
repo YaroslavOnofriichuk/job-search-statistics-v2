@@ -4,8 +4,7 @@ import { GlobalStyle } from "./GlobalStyle";
 import { theme as stylesTheme } from "./theme";
 import { Header } from "./Header";
 import { Main } from "./Main";
-
-type Theme = "dark" | "light";
+import type { Theme } from "../types";
 
 export const Layout = ({ children }: { children: ReactNode}) => {
     const [theme, setTheme] = useState<Theme>(() =>
@@ -14,6 +13,7 @@ export const Layout = ({ children }: { children: ReactNode}) => {
             ? "dark"
             : "light"
     );
+    const [open, setOpen] = useState(false);
 
     useEffect(() => {
         const mq = window.matchMedia("(prefers-color-scheme: dark)");
@@ -25,16 +25,20 @@ export const Layout = ({ children }: { children: ReactNode}) => {
         return () => mq.removeEventListener("change", handler);
     }, []);
 
-    const handleChangeTheme = (theme: Theme) => {
-        setTheme(theme);
+    const handleChangeTheme = () => {
+        setTheme(theme === "dark" ? "light" : "dark");
         localStorage.setItem("theme", theme);
+    };
+
+    const handleOpen = () => {
+        setOpen(!open);
     };
 
     return (
         <ThemeProvider theme={stylesTheme[theme]}>
             <GlobalStyle />
-            <Header />
-            <Main>
+            <Header open={open} />
+            <Main open={open} onOpen={handleOpen} onChangeTheme={handleChangeTheme} >
                 {children}
             </Main>
         </ThemeProvider>

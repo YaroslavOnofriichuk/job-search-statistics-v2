@@ -3,13 +3,13 @@ import {
     ListIcon,
     CalendarIcon,
     UserIcon,
+    HomeIcon,
 } from "../../components/icons";
-import { Logo } from "../../components/Logo";
 
 export const config = [
     {
         path: "home",
-        icon: Logo,
+        icon: HomeIcon,
     },
     {
         path: "notes",

@@ -2,13 +2,13 @@ const lightTheme = {
     colors: {
         body: {
             primary: "#FFFFFF",
-            secondary: "#909396",
-            accent: "#76d1e8",
+            secondary: "#C2C2C2",
         },
         text: {
-            primary: "#0c0c0d",
-            secondary: "#1d1e1f",
-            accent: "#76d1e8",
+            primary: "#12181F",
+            secondary: "#161D26",
+            accent: "#12BE73",
+            error: "#EF5350",
         }
     },
 };
@@ -16,14 +16,14 @@ const lightTheme = {
 const darkTheme = {
     colors: {
         body: {
-            primary: "#1d1e1f",
-            secondary: "#0c0c0d",
-            accent: "#76d1e8",
+            primary: "#12181F",
+            secondary: "#161D26",
         },
         text: {
             primary: "#FFFFFF",
-            secondary: "#909396",
-            accent: "#76d1e8",
+            secondary: "#C2C2C2",
+            accent: "#12BE73",
+            error: "#EF5350",
         }
     },
 };
