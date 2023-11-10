@@ -1,37 +1,58 @@
 import { useState } from "react";
-import { Button } from "./Settings";
-import { Popup } from "./Popup";
+import { useTranslation } from "react-i18next";
+import { Button } from "./Button";
+import { List } from "./List";
 import { SettingIcon } from "../../../components/icons";
-import { useOutsideClick } from "../../../hooks";
+import { Modal } from "../../../components/Modal";
+import { ArrowRightIcon } from "../../../components/icons";
 import type { Language } from "../../../types";
 
-interface SettingsProps {
-    onChangeTheme: () => void,
-}
-
-export const Settings = ({ onChangeTheme }: SettingsProps ) => {
+export const Settings = () => {
     const [open, setOpen] = useState(false);
-    const [language, setLanguage] = useState<Language>("eng");
-    const ref = useOutsideClick(() => setOpen(false));
+    const { t, i18n } = useTranslation("components/settings");
 
-    const handleClick = () => {
-        console.log("open", open)
-        console.log("!open", !open)
-        setOpen(!open);
+    const handleChangeLanguage = (newlang: Language) => {
+        i18n.changeLanguage(newlang);
+        localStorage.setItem("lng", newlang);
     };
 
-    return <>
-        <Button type="button" onClick={handleClick} className={open ? "active" : ""}>
-            <SettingIcon size="32px"/>
-        </Button>
+    return (
+        <>
+            <Button
+                type="button"
+                onClick={() => setOpen(!open)}
+                className={open ? "active" : ""}
+            >
+                <SettingIcon size="32px" />
+            </Button>
 
-        {open && 
-            //@ts-ignore
-                <Popup ref={ref}>
-                    <div className="head">Settings</div>
-                    <div>asd</div>
-                    <div>asd</div>
-                </Popup>
-            }
-    </>
+            <Modal
+                open={open}
+                title={t("title")}
+                onClose={() => setOpen(false)}
+            >
+                <List>
+                    <li>
+                        <p>{t("theme")}</p>
+                    </li>
+
+                    <li>
+                        <p>{t("language")}</p>
+                        <button
+                            className="language-button"
+                            type="button"
+                            onClick={() =>
+                                handleChangeLanguage(
+                                    i18n.language === "ukr" ? "eng" : "ukr"
+                                )
+                            }
+                        >
+                            <p>{i18n.language === "ukr" ? "Українська" : "English"}</p>
+                            <ArrowRightIcon size="20px" />
+                        </button>
+                    </li>
+                </List>
+            </Modal>
+        </>
+    );
 };

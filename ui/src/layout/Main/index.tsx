@@ -2,21 +2,17 @@ import { ReactNode } from "react";
 import { Main as Wrapper } from "./Main";
 import { Burger } from "./Burger";
 import { Settings } from "./Settings";
+import { useHeaderStore } from "../../hooks";
 
-interface MainProps {
-    children: ReactNode;
-    open: boolean;
-    onOpen: () => void;
-    onChangeTheme: () => void;
-}
+export const Main = ({ children }: { children: ReactNode }) => {
+    const open = useHeaderStore(({open}) => open);
 
-export const Main = ({ children, open, onOpen, onChangeTheme }: MainProps) => {
     return (
         <Wrapper open={open}>
             <section className="head">
-                <Burger onClick={onOpen} open={open} />
+                <Burger />
 
-                <Settings onChangeTheme={onChangeTheme} />
+                <Settings />
             </section>
 
             <section className="content">{children}</section>

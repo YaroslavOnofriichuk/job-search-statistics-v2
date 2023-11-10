@@ -1,12 +1,14 @@
 import { Button } from "./Burger";
+import { useHeaderStore } from "../../../hooks";
 
-interface BurgerProps {
-    onClick: () => void,
-    open: boolean,
-}
+export const Burger = () => {
+    const open = useHeaderStore(({open}) => open);
 
-export const Burger = ({ onClick, open }: BurgerProps ) => {
-    return <Button type="button" onClick={onClick} className={`toggle ${open ? "active" : ""}`}>
+    const handleClick = () => {
+        useHeaderStore.setState({ open: !open })
+    };
+
+    return <Button type="button" onClick={handleClick} className={`toggle ${open ? "active" : ""}`}>
         <span></span>
         <span></span>
         <span></span>

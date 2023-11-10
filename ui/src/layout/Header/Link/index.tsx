@@ -1,15 +1,17 @@
 import { ComponentType } from "react";
 import { Link as NavLink } from "./Link";
 import { IconProps } from "../../../components/icons";
+import { useHeaderStore } from "../../../hooks";
 
 interface LinkProps {
     path: string,
     icon: ComponentType<IconProps>,
-    open: boolean,
 }
 
-export const Link = ({ path, icon: Icon, open }: LinkProps) => (
-    <NavLink
+export const Link = ({ path, icon: Icon }: LinkProps) => {
+    const open = useHeaderStore(({open}) => open);
+
+    return <NavLink
         to={path}
         className={({ isActive, isPending }) =>
             isActive ? "active" : isPending ? "pending" : ""
@@ -18,4 +20,4 @@ export const Link = ({ path, icon: Icon, open }: LinkProps) => (
         <Icon />
         {open && <p>{path}</p>}
     </NavLink>
-);
+};

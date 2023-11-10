@@ -18,7 +18,7 @@ export const GlobalStyle = createGlobalStyle`
     font-family: 'Oswald', sans-serif;
     font-style: normal;
     font-weight: 300;
-    font-size: 24px;
+    font-size: 18px;
     line-height: 1.2;
 
     color: ${({ theme }) => theme.colors.text.primary};

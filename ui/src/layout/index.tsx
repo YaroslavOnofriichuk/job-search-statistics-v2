@@ -1,44 +1,27 @@
-import { useState, useEffect, ReactNode } from "react";
+import { ReactNode, useLayoutEffect } from "react";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "./GlobalStyle";
 import { theme as stylesTheme } from "./theme";
 import { Header } from "./Header";
 import { Main } from "./Main";
-import type { Theme } from "../types";
+import { useThemeStore } from "../hooks";
 
 export const Layout = ({ children }: { children: ReactNode}) => {
-    const [theme, setTheme] = useState<Theme>(() =>
-        localStorage.getItem("theme") ||
+    const theme = useThemeStore(({theme}) => theme);
+
+    useLayoutEffect(() => {
+        const theme = localStorage.getItem("theme") ||
         window.matchMedia("(prefers-color-scheme: dark)").matches
             ? "dark"
-            : "light"
-    );
-    const [open, setOpen] = useState(false);
-
-    useEffect(() => {
-        const mq = window.matchMedia("(prefers-color-scheme: dark)");
-        const handler = (evt: MediaQueryListEvent) => {
-            setTheme(evt.matches ? "dark" : "light");
-        };
-        mq.addEventListener("change", handler);
-
-        return () => mq.removeEventListener("change", handler);
-    }, []);
-
-    const handleChangeTheme = () => {
-        setTheme(theme === "dark" ? "light" : "dark");
-        localStorage.setItem("theme", theme);
-    };
-
-    const handleOpen = () => {
-        setOpen(!open);
-    };
+            : "light";
+        useThemeStore.setState({ theme })
+    }, [])
 
     return (
         <ThemeProvider theme={stylesTheme[theme]}>
             <GlobalStyle />
-            <Header open={open} />
-            <Main open={open} onOpen={handleOpen} onChangeTheme={handleChangeTheme} >
+            <Header />
+            <Main>
                 {children}
             </Main>
         </ThemeProvider>

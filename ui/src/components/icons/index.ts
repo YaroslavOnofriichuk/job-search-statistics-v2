@@ -4,7 +4,7 @@ export { ListIcon } from "./ListIcon";
 export { CalendarIcon } from "./CalendarIcon";
 export { UserIcon } from "./UserIcon";
 export { SortIcon } from "./SortIcon";
-export { CloseIcon } from "./CloseIcon";
+export { ArrowRightIcon } from "./ArrowRightIcon";
 export { SettingIcon } from "./SettingsIcon";
 
 

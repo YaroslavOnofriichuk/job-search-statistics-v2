@@ -11,10 +11,18 @@ export const useOutsideClick = (callback: () => void) => {
             }
         };
 
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "Escape") {
+                callback();
+            }
+        };
+
         document.addEventListener("click", handleClick, true);
+        document.addEventListener("keydown", handleKeyDown, true);
 
         return () => {
             document.removeEventListener("click", handleClick, true);
+            document.removeEventListener("keydown", handleKeyDown, true);
         };
     }, [callback, ref]);
 
