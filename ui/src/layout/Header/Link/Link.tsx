@@ -23,6 +23,7 @@ export const Link = styled(NavLink)`
 
         svg {
             transition: .5s;
+            fill: ${({ theme }) => theme.colors.text.primary};
         }
     }
 

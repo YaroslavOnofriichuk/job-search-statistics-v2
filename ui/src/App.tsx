@@ -1,11 +1,17 @@
 import { Outlet } from "react-router-dom";
+import { ApolloProvider } from '@apollo/client';
+import { client } from "./graphql";
 import { Layout } from "./layout";
+
+
 
 function App() {
     return (
-        <Layout>
-            <Outlet />
-        </Layout>
+        <ApolloProvider client={client}>
+            <Layout>
+                <Outlet />
+            </Layout>
+        </ApolloProvider>
     );
 }
 

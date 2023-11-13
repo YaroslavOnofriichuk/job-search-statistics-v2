@@ -5,6 +5,7 @@ import { List } from "./List";
 import { SettingIcon } from "../../../components/icons";
 import { Modal } from "../../../components/Modal";
 import { ArrowRightIcon } from "../../../components/icons";
+import { ThemeSwitch } from "../../../components/ThemeSwitch";
 import type { Language } from "../../../types";
 
 export const Settings = () => {
@@ -34,6 +35,7 @@ export const Settings = () => {
                 <List>
                     <li>
                         <p>{t("theme")}</p>
+                        <ThemeSwitch />
                     </li>
 
                     <li>
@@ -47,7 +49,7 @@ export const Settings = () => {
                                 )
                             }
                         >
-                            <p>{i18n.language === "ukr" ? "Українська" : "English"}</p>
+                            <p>{i18n.language === "ukr" ? "English" : "Українська"}</p>
                             <ArrowRightIcon size="20px" />
                         </button>
                     </li>

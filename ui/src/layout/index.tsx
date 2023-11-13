@@ -10,10 +10,12 @@ export const Layout = ({ children }: { children: ReactNode}) => {
     const theme = useThemeStore(({theme}) => theme);
 
     useLayoutEffect(() => {
-        const theme = localStorage.getItem("theme") ||
-        window.matchMedia("(prefers-color-scheme: dark)").matches
+        const themeFromLocalStorage = localStorage.getItem("theme");
+        const browserTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
             ? "dark"
             : "light";
+        const theme = themeFromLocalStorage ? themeFromLocalStorage : browserTheme;
+        //@ts-ignore
         useThemeStore.setState({ theme })
     }, [])
 

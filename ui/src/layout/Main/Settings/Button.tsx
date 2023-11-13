@@ -18,6 +18,7 @@ export const Button = styled.button`
     outline: none;
 
     svg {
+        fill: ${({theme}) => theme.colors.text.primary}; 
         transition: .5s;
     }
 

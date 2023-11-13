@@ -4,7 +4,7 @@ import App from "../App";
 import { HomePage } from "../pages/HomePage";
 import { CalendarPage } from "../pages/CalendarPage";
 import { StatisticPage } from "../pages/StatisticPage";
-import { NotesPage } from "../pages/NotesPage";
+import { NotesPage, notesLoader } from "../pages/NotesPage";
 
 export const router = createBrowserRouter([
     {
@@ -21,6 +21,7 @@ export const router = createBrowserRouter([
                 path: "notes",
                 element: <NotesPage />,
                 errorElement: <ErrorPage />,
+                loader: notesLoader,
             },
             {
                 path: "calendar",

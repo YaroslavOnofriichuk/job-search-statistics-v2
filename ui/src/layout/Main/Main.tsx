@@ -12,7 +12,7 @@ export const Main = styled.main<MainProps>`
 
     .head {
         width: 100%;
-        height: 60px;
+        height: 70px;
         padding: 0 10px;
         background-color: ${props => props.theme.colors.body.primary};
         position: sticky;

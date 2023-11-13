@@ -45,4 +45,14 @@ export const Button = styled.button`
         transform: rotate(45deg);
         background-color: ${({ theme }) => theme.colors.text.secondary};
     }
+
+    &:focus .leftright{
+        transform: rotate(-45deg);
+        background-color: ${({ theme }) => theme.colors.text.secondary};
+    }
+
+    &:focus .rightleft{
+        transform: rotate(45deg);
+        background-color: ${({ theme }) => theme.colors.text.secondary};
+    }
 `;

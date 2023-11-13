@@ -33,6 +33,9 @@ export const List = styled.ul`
 
         div {
             margin-left: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
             svg {
                 fill: ${(props) => props.theme.colors.text.primary};
