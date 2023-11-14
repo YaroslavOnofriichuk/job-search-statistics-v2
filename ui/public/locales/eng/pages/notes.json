@@ -1,0 +1,10 @@
+{
+    "columns": {
+        "createdAt": "Sended at",
+        "position": "Position",
+        "company": "Company",
+        "source": "Source",
+        "description": "Description",
+        "status": "Status"
+    }
+}

@@ -48,7 +48,8 @@ type Note {
   source: NoteSource!
   position: String!
   company: String!
-  description: String!
+  link: String!
+  description: String
   status: String!
   tags: [NoteTag!]!
   createdAt: DateTime!

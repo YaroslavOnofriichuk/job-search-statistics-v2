@@ -26,7 +26,7 @@ export const Main = styled.main<MainProps>`
 
     .content {
         padding: 10px;
-        height: 100px;
+        height: 100%;
     }
 
     @media (min-width: 767px) {

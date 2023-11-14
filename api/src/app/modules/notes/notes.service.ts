@@ -45,7 +45,9 @@ export class NotesService {
   }
 
   async findAll(args: GetNotesArgs) {
+    console.log("================", args)
     const qb = this.notesRepository.createQueryBuilder("note")
+      .leftJoinAndSelect("note.source", "source")
       .where("note.userId = :userId", { userId: hardCodeUserId })
 
     if (Object.keys(args.filters || {}).length > 0) {
@@ -67,7 +69,7 @@ export class NotesService {
     };
     const paginationSkip = currentPage && limit ? (currentPage - 1) * limit : null;
 
-    if (paginationSkip && limit) {
+    if (paginationSkip !== null && limit !== null) {
       qb.skip(paginationSkip);
       qb.take(limit);
     }

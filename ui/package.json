@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.8.7",
+    "date-fns": "^2.30.0",
     "graphql": "^16.8.1",
     "i18next": "^23.7.1",
     "i18next-browser-languagedetector": "^7.2.0",

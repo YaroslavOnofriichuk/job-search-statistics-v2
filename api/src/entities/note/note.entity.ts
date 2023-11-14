@@ -52,10 +52,11 @@ export class Note {
   @Column({ type: 'varchar', length: 128 })
   company: string;
 
+  @Field()
   @Column({ type: 'varchar', length: 256 })
   link: string;
 
-  @Field()
+  @Field({ nullable: true })
   @Column({ type: 'text', nullable: true })
   description: string;
 

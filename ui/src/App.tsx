@@ -3,8 +3,6 @@ import { ApolloProvider } from '@apollo/client';
 import { client } from "./graphql";
 import { Layout } from "./layout";
 
-
-
 function App() {
     return (
         <ApolloProvider client={client}>

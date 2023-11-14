@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, Suspense } from "react";
 import { Main as Wrapper } from "./Main";
 import { Burger } from "./Burger";
 import { Settings } from "./Settings";
@@ -11,8 +11,10 @@ export const Main = ({ children }: { children: ReactNode }) => {
         <Wrapper open={open}>
             <section className="head">
                 <Burger />
-
-                <Settings />
+                
+                <Suspense fallback={null}>
+                    <Settings />
+                </Suspense>
             </section>
 
             <section className="content">{children}</section>

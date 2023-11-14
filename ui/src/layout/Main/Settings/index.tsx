@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, startTransition } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "./Button";
 import { List } from "./List";
@@ -13,8 +13,10 @@ export const Settings = () => {
     const { t, i18n } = useTranslation("components/settings");
 
     const handleChangeLanguage = (newlang: Language) => {
-        i18n.changeLanguage(newlang);
-        localStorage.setItem("lng", newlang);
+        startTransition(() => {
+            i18n.changeLanguage(newlang);
+            localStorage.setItem("lng", newlang);
+        });
     };
 
     return (
@@ -27,6 +29,7 @@ export const Settings = () => {
                 <SettingIcon size="32px" />
             </Button>
 
+            
             <Modal
                 open={open}
                 title={t("title")}
@@ -54,7 +57,7 @@ export const Settings = () => {
                         </button>
                     </li>
                 </List>
-            </Modal>
+            </Modal>   
         </>
     );
 };
