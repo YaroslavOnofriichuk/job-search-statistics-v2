@@ -34,6 +34,7 @@ export const notesLoader = async () => {
 		variables: {
 			page: 1,
             limit: 10,
+			sort: "DESC",
 		},
 	});
 

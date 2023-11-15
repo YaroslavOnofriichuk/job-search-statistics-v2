@@ -1,24 +1,17 @@
-import { Field, InputType, PickType,Int } from '@nestjs/graphql';
+import { Field, InputType, Int } from '@nestjs/graphql';
 import {
   IsOptional,
   IsInt,
   Min,
   IsEnum,
-  ValidateNested,
-  IsObject,
+  IsString,
 } from 'class-validator';
-import { UpdateNoteInput } from './update-note.input';
+import { NoteStatus } from '../../../../entities/note/note.entity';
 
 enum SortType {
   ASC = "ASC",
   DESC = "DESC",
 }
-
-@InputType()
-class Filters extends PickType(UpdateNoteInput, [
-  'position', 'company', 'description', 'status'
-] as const) {}
-
 
 @InputType()
 export class GetNotesArgs {
@@ -40,8 +33,12 @@ export class GetNotesArgs {
   sort: SortType;
 
   @IsOptional()
-  @IsObject()
-  @ValidateNested()
-  @Field({ description: 'Filters', nullable: true })
-  filters: Filters;
+  @IsEnum(NoteStatus)
+  @Field({ description: 'Status', nullable: true })
+  status: NoteStatus;
+
+  @IsOptional()
+  @IsString()
+  @Field(() => String, { description: 'Search', nullable: true })
+  search: string;
 }

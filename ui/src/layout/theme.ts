@@ -2,7 +2,7 @@ const lightTheme = {
     colors: {
         body: {
             primary: "#FFFFFF",
-            secondary: "#C2C2C2",
+            secondary: "#808195",
         },
         text: {
             primary: "#12181F",
@@ -21,7 +21,7 @@ const darkTheme = {
         },
         text: {
             primary: "#FFFFFF",
-            secondary: "#C2C2C2",
+            secondary: "#808195",
             accent: "#12BE73",
             error: "#EF5350",
         }

@@ -7,6 +7,15 @@ export type NoteSource = {
     name?: string,
 }
 
+export enum NoteStatus {
+    ACCEPTED = 'ACCEPTED',
+    REJECTED = 'REJECTED',
+    CONSIDERED = 'CONSIDERED',
+    SENT = 'SENT',
+    TEST_TASK = 'TEST_TASK',
+    INTERVIEW = 'INTERVIEW',
+}
+
 export type Note = {
     id?: number,
     userId?: number,
@@ -15,7 +24,7 @@ export type Note = {
     position?: string,
     company?: string,
     description?: string,
-    status?: string,
+    status?: NoteStatus,
     createdAt?: Date,
     updatedAt?: Date,
 }

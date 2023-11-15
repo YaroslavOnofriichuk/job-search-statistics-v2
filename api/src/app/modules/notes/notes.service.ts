@@ -45,19 +45,16 @@ export class NotesService {
   }
 
   async findAll(args: GetNotesArgs) {
-    console.log("================", args)
     const qb = this.notesRepository.createQueryBuilder("note")
       .leftJoinAndSelect("note.source", "source")
       .where("note.userId = :userId", { userId: hardCodeUserId })
 
-    if (Object.keys(args.filters || {}).length > 0) {
-      Object.entries(args.filters).forEach(([key, value]) => {
-        if (key === "status") {
-          qb.andWhere("note.status = :value", { value })
-        } else {
-          qb.andWhere(`LOWER(note.${key}) ~* LOWER(:value)`, { value })
-        }
-      })
+    if (args.search) {
+      qb.andWhere(`LOWER(note.position) ~* LOWER(:value)`, { value: args.search })
+    }
+
+    if (args.status) {
+      qb.andWhere("note.status = :value", { value: args.status })
     }
 
     const limit = args.limit || null;

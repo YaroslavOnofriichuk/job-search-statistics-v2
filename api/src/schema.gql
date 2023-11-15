@@ -94,22 +94,11 @@ input GetNotesArgs {
   """Sort"""
   sort: String
 
-  """Filters"""
-  filters: Filters
-}
-
-input Filters {
-  """Note position"""
-  position: String
-
-  """Note company"""
-  company: String
-
-  """Note description"""
-  description: String
-
-  """Note status"""
+  """Status"""
   status: String
+
+  """Search"""
+  search: String
 }
 
 type Mutation {
