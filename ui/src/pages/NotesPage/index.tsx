@@ -13,7 +13,6 @@ export const NotesPage = () => {
 	const { isMobile } = useMatchMedia();
 	
     return (<div>
-		<h1>Notes</h1>
 		<Suspense fallback={<Loader />}>
 			<Await
 				resolve={notes}

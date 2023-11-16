@@ -4,6 +4,7 @@ type HookResponse = {
     isMobile: boolean;
     isTablet: boolean;
     isDesktop: boolean;
+    isWideDesktop: boolean;
 };
 
 type HookType = () => HookResponse;
@@ -11,7 +12,8 @@ type HookType = () => HookResponse;
 const queries = [
     "(max-width: 766px)",
     "(min-width: 767px) and (max-width: 1199px)",
-    "(min-width: 1200px)",
+    "(min-width: 1200px) and (max-width: 1699px)",
+    "(min-width: 1700px)",
 ];
 
 export const useMatchMedia: HookType = () => {
@@ -39,11 +41,11 @@ export const useMatchMedia: HookType = () => {
             );
     }, [getValues, mediaQueryLists]);
 
-    return["isMobile", "isTablet", "isDesktop"].reduce<HookResponse>(
+    return["isMobile", "isTablet", "isDesktop", "isWideDesktop"].reduce<HookResponse>(
         (acc, screen, index) => ({
             ...acc,
             [screen]: values[index],
         }),
-        { isMobile: false, isTablet: false, isDesktop: false }
+        { isMobile: false, isTablet: false, isDesktop: false, isWideDesktop: false }
     );
 };

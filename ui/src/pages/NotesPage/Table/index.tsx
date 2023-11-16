@@ -7,12 +7,14 @@ import { GET_NOTES } from "../../../graphql";
 import type { Note } from "../../../types";
 import { Pagination } from "../../../components/Pagination";
 import { StatusButton } from "../../../components/StatusButton";
+import { Loader } from "../../../components/Loader";
+import { FiltersBar } from "../FiltersBar";
 import { formatDate } from "../../../helpers";
-import { reducer, initialState } from "./reducer";
+import { reducer, initialState } from "../reducer";
 
 export const Table = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
-    const { data, refetch } = useQuery(GET_NOTES, { variables: state });
+    const { data, loading, error , refetch } = useQuery(GET_NOTES, { variables: state });
     const { t } = useTranslation("pages/notes");
     const navigate = useNavigate();
 
@@ -21,8 +23,17 @@ export const Table = () => {
             refetch(state);
         }
     }, [refetch, state])
+
+    if (loading) {
+        return <Loader />
+    }
+
+    if (error) {
+        return <h1>Error</h1>
+    }
     
     return <>
+        <FiltersBar filters={state} dispatch={dispatch} />
         <TableStyled>
             <thead>
                 <tr>

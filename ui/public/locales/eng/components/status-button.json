@@ -5,6 +5,7 @@
         "CONSIDERED": "Considered",
         "SENT": "Sent",
         "TEST_TASK": "Test task",
-        "INTERVIEW": "Interview"
+        "INTERVIEW": "Interview",
+        "ALL": "All"
     }
 }

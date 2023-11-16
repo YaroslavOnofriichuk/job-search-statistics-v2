@@ -1,6 +1,6 @@
 import type { NoteStatus } from "../types";
 
-export const getStatusColor = (status: NoteStatus | "ALL"): string => {
+export const getStatusColor = (status: keyof typeof NoteStatus | "ALL"): string => {
     switch (status) {
         case "ACCEPTED":
           return "#10691a";

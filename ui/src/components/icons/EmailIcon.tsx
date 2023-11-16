@@ -1,12 +1,12 @@
 import { IconContext } from 'react-icons';
-import { BsArrowDownUp } from 'react-icons/bs';
+import { MdOutlineAlternateEmail } from "react-icons/md";
 import type { IconProps } from './index';
 
-export const SortIcon = ({ size = '15px', color = '#ffffff' }: IconProps) => {
+export const EmailIcon = ({ size = '18px', color = '#ffffff' }: IconProps) => {
   return (
     <IconContext.Provider value={{ color: `${color}`, size: `${size}` }}>
       <div>
-        <BsArrowDownUp />
+        <MdOutlineAlternateEmail />
       </div>
     </IconContext.Provider>
   );

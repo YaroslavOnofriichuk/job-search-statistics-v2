@@ -49,7 +49,7 @@ export class NotesService {
       .leftJoinAndSelect("note.source", "source")
       .where("note.userId = :userId", { userId: hardCodeUserId })
 
-    if (args.search) {
+    if (args.search?.trim()) {
       qb.andWhere(`LOWER(note.position) ~* LOWER(:value)`, { value: args.search })
     }
 

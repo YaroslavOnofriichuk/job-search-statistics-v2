@@ -5,7 +5,6 @@ interface ButtonProps {
 }
 
 export const Button = styled.button<ButtonProps>`
-    width: 100%;
     height: 35px;
     border-radius: 12px;
     cursor: pointer;
@@ -33,7 +32,7 @@ export const Button = styled.button<ButtonProps>`
         pointer-events: none;
     }
 
-    &[aria-checked] {
+    &[aria-checked=true] {
         color: ${props => props.theme.colors.text.primary};
         background-color: ${props => props.theme.colors.text.accent};
         box-shadow: none;

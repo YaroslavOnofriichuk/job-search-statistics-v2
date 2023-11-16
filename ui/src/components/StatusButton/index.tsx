@@ -4,7 +4,7 @@ import { getStatusColor } from "../../helpers";
 import { Button } from "./Button";
 
 interface ButtonProps {
-    status: NoteStatus | "ALL",
+    status: keyof typeof NoteStatus | "ALL",
     disabled?: boolean,
     active?: boolean,
     onClick?: () => void,

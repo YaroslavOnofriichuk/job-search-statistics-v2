@@ -1,16 +1,16 @@
-import type { NoteStatus } from "../../../types";
+import type { NoteStatus } from "../../types";
 
-export interface TableState {
+export type TableState = {
     page: number;
     limit: number;
     sort: "DESC" | "ASC";
-    status?: NoteStatus;
+    status?: keyof typeof NoteStatus | "ALL";
     search?: string;
 }
 
 export type Action =
     | { type: "SET_PAGE"; payload: number }
-    | { type: "SET_STATUS"; payload: NoteStatus | "ALL" }
+    | { type: "SET_STATUS"; payload: keyof typeof NoteStatus | "ALL" }
     | { type: "SET_SEARCH", payload: string }
     | { type: "SET_SORT", payload: "DESC" | "ASC" };
 
@@ -20,10 +20,10 @@ export const initialState: TableState = {
     sort: "DESC",
 };
 
-export function reducer(state: TableState, action: Action): HelloState {
+export function reducer(state: TableState, action: Action): TableState {
     switch (action.type) {
         case "SET_STATUS":
-            return () => {
+            return (() => {
                 const newState = { ...state }
                 if (action.payload === "ALL") {
                     delete newState.status;
@@ -31,7 +31,7 @@ export function reducer(state: TableState, action: Action): HelloState {
                     newState.status = action.payload
                 }
                 return newState
-            };
+            })();
         case "SET_SEARCH":
             return { ...state, search: action.payload };
         case "SET_SORT":
