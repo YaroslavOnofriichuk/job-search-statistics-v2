@@ -6,17 +6,19 @@ interface ButtonProps {
     label: string,
     onClick: () => void,
     disabled?: boolean,
+    size?: "small" | "big",
 }
 
 export const Button = (props: ButtonProps) => {
     return <StyledButton
         onClick={props.onClick}
         disabled={props.disabled}
+        size={props.size}
     >
-        <span></span>
+        {props.size === "big" && <span></span>}
         
         <p>{props.label}</p>
 
-        {props.children}
+        {props.size === "big" && props.children}
     </StyledButton>
 };

@@ -1,13 +1,17 @@
 import styled from "styled-components";
 
-export const Button = styled.button`
+interface ButtonProps {
+    size?: "small" | "big",
+}
+
+export const Button = styled.button<ButtonProps>`
     width: 100%;
-    max-width: 350px;
-    height: 60px;
-    padding: 12px;
+    max-width: ${({ size }) => (size === "big" ? "350px" : "85px")};
+    height: ${({ size }) => (size === "big" ? "60px" : "35px")};
+    padding: ${({ size }) => (size === "big" ? "12px" : "7px 12px")};
     background-color: ${({ theme }) => theme.colors.text.accent};
     border: 2px solid ${({ theme }) => theme.colors.body.primary};
-    border-radius: 25px;
+    border-radius: ${({ size }) => (size === "big" ? "25px" : "14px")};
     cursor: pointer;
     outline: none;
     position: relative;
@@ -19,6 +23,7 @@ export const Button = styled.button`
     & p {
         color: ${({ theme }) => theme.colors.text.primary};
         transition: .5s;
+        font-size: ${({ size }) => (size === "big" ? "18px" : "10px")};
     }
 
     & div {

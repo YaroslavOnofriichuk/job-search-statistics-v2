@@ -1,18 +1,22 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.div`
+interface WrapperProps {
+    size?: "small" | "big",
+}
+
+export const Wrapper = styled.div<WrapperProps>`
     width: 100%;
-    max-width: 350px;
-    height: 64px;
+    max-width: ${({ size }) => (size === "big" ? "350px" : "85px")};
+    height: ${({ size }) => (size === "big" ? "60px" : "35px")};
     border: 2px solid ${({ theme }) => theme.colors.body.primary};
-    border-radius: 25px;
+    border-radius: ${({ size }) => (size === "big" ? "25px" : "14px")};
     background: ${({ theme }) => theme.colors.body.primary};
     color: ${({ theme }) => theme.colors.text.primary};
     /* position: relative;
     z-index: 1; */
     display: flex;
     align-items: center;
-    padding: 10px;
+    padding: ${({ size }) => (size === "big" ? "12px" : "7px 12px")};
     transition: .5s;
 
     & button {

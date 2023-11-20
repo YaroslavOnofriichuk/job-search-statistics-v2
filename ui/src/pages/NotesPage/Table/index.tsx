@@ -14,7 +14,7 @@ import { reducer, initialState } from "../reducer";
 
 export const Table = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
-    const { data, loading, error , refetch } = useQuery(GET_NOTES, { variables: state });
+    const { data, loading, error, refetch } = useQuery(GET_NOTES, { variables: state });
     const { t } = useTranslation("pages/notes");
     const navigate = useNavigate();
 

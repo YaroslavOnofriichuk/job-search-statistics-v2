@@ -5,7 +5,7 @@ export const Bar = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin: 20px 0;
 
     ul {
         margin: 0 10px;

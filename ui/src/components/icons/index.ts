@@ -13,6 +13,7 @@ export { SearchIcon } from "./SearchIcon";
 export { EmailIcon } from "./EmailIcon";
 export { VisibleIcon } from "./VisibleIcon";
 export { UnVisibleIcon } from "./UnVisibleIcon";
+export { LoadingIcon } from "./LoadingIcon";
 
 export interface IconProps {
     size?: string;

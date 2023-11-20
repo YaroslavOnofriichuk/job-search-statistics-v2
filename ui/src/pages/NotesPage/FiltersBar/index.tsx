@@ -21,7 +21,7 @@ const statuses: Array<keyof typeof NoteStatus | "ALL"> =
 
 export const FiltersBar = ({ filters, dispatch }: BarProps) => {
     const [value, setValue] = useCallbackState(filters.search || "");
-    const { isWideDesktop } = useMatchMedia();
+    const { isDesktop } = useMatchMedia();
     const { t } = useTranslation("components/filters-bar");
 
     const handleChangeStatus = (status: keyof typeof NoteStatus | "ALL") => {
@@ -44,9 +44,10 @@ export const FiltersBar = ({ filters, dispatch }: BarProps) => {
             placeholder={t("search")}
             value={value}
             onChange={handleChangeSearch}
+            size="small"
         />
 
-        {isWideDesktop ? <ul>
+        {isDesktop ? <ul>
             {statuses.map(status => (
                 <li key={status}>
                     <StatusButton 
@@ -60,6 +61,7 @@ export const FiltersBar = ({ filters, dispatch }: BarProps) => {
         </ul> : <div style={{ margin: "0 10px" }}></div>}
 
         <Button
+            size="small"
             label={filters.sort === "DESC" ? t("descent") : t("ascent")}
             onClick={() => dispatch({ type: "SET_SORT", payload: filters.sort === "DESC" ? "ASC" : "DESC" })}
         >

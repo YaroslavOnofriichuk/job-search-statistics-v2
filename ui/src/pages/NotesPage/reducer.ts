@@ -10,13 +10,14 @@ export type TableState = {
 
 export type Action =
     | { type: "SET_PAGE"; payload: number }
+    | { type: "SET_LIMIT"; payload: number }
     | { type: "SET_STATUS"; payload: keyof typeof NoteStatus | "ALL" }
     | { type: "SET_SEARCH", payload: string }
     | { type: "SET_SORT", payload: "DESC" | "ASC" };
 
 export const initialState: TableState = {
     page: 1,
-    limit: 10,
+    limit: 2,
     sort: "DESC",
 };
 
@@ -38,6 +39,8 @@ export function reducer(state: TableState, action: Action): TableState {
             return { ...state, sort: action.payload };
         case "SET_PAGE":
             return { ...state, page: action.payload };
+        case "SET_LIMIT":
+            return { ...state, limit: action.payload };
         default:
             return state;
     }
