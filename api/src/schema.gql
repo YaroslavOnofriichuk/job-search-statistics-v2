@@ -79,9 +79,15 @@ type NotesPaginationResponse {
   nextPage: Int
 }
 
+type Auth {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
 type Query {
   notes(getNotesArgs: GetNotesArgs!): NotesPaginationResponse!
   note(id: Int!): Note!
+  auth(id: Int!): Auth!
 }
 
 input GetNotesArgs {
@@ -105,6 +111,9 @@ type Mutation {
   createNote(createNoteInput: CreateNoteInput!): Note!
   updateNote(updateNoteInput: UpdateNoteInput!): Note!
   removeNote(id: Int!): Note!
+  createAuth(createAuthInput: CreateAuthInput!): Auth!
+  updateAuth(updateAuthInput: UpdateAuthInput!): Auth!
+  removeAuth(id: Int!): Auth!
 }
 
 input CreateNoteInput {
@@ -158,4 +167,15 @@ input UpdateNoteInput {
   """Note tags"""
   tags: [Int!]
   id: ID!
+}
+
+input CreateAuthInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateAuthInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
 }

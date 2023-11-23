@@ -5,6 +5,9 @@ import { HomePage } from "../pages/HomePage";
 import { CalendarPage } from "../pages/CalendarPage";
 import { StatisticPage } from "../pages/StatisticPage";
 import { NotesPage, notesLoader } from "../pages/NotesPage";
+import { AuthPage } from "../pages/AuthPage";
+import { Login } from "../pages/AuthPage/Login";
+import { Register } from "../pages/AuthPage/Register";
 
 export const router = createBrowserRouter([
     {
@@ -15,23 +18,33 @@ export const router = createBrowserRouter([
             {
                 path: "home",
                 element: <HomePage />,
-                errorElement: <ErrorPage />,
             },
             {
                 path: "notes",
                 element: <NotesPage />,
-                errorElement: <ErrorPage />,
                 loader: notesLoader,
             },
             {
                 path: "calendar",
                 element: <CalendarPage />,
-                errorElement: <ErrorPage />,
             },
             {
                 path: "statistic",
                 element: <StatisticPage />,
-                errorElement: <ErrorPage />,
+            },
+            {
+                path: "auth",
+                element: <AuthPage />,
+                children: [
+                    {
+                        path: "signin",
+                        element: <Login />,
+                    },
+                    {
+                        path: "signup",
+                        element: <Register />,
+                    },
+                ]
             },
         ],
     },
