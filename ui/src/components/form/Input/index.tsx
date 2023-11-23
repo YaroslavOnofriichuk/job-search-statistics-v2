@@ -9,12 +9,14 @@ interface InputProps {
     value: string,
     onChange: (event: ChangeEvent<HTMLInputElement>) => void,
     size?: "small" | "big",
+    error?: boolean,
+    helperText?: string | null,
 }
 
 export const Input = (props: InputProps) => {
     const [type, setType] = useState(props.type === "password" ? "password" : "text");
 
-    return <Wrapper size={props.size}>
+    return <Wrapper size={props.size} $error={props.error}>
         {props.size === "big" && <button 
             type="button"
             disabled={props.type !== "password"}
@@ -24,11 +26,13 @@ export const Input = (props: InputProps) => {
         </button>}
         
         <input 
-            type={props.type === "password" ? type : props.type}
+            type={props.type === "password" ? type : "text"}
             placeholder={props.placeholder || ""}
             name={props.name}
             value={props.value}
             onChange={props.onChange}
         />
+
+        {props.helperText && <p>{props.helperText}</p>}
     </Wrapper>
 };

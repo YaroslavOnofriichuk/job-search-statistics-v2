@@ -1,3 +1,8 @@
+import { Form } from "../Form";
+import type { FormData } from "../Form";
+
 export const Register = () => {
-    return <h1>register</h1>
+    const onSubmit = (data: FormData) => console.log(data);
+
+    return <Form onSubmit={onSubmit} />
 };

@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 interface ButtonProps {
     size?: "small" | "big",
+    type?: "button" | "submit" | "reset",
 }
 
 export const Button = styled.button<ButtonProps>`

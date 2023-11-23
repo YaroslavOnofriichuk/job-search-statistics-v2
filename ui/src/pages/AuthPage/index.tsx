@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { useMatch } from "react-router-dom";
+import { useMatch, Outlet } from "react-router-dom";
 import { Wrapper } from "./Wrapper";
 import { TabLink } from "../../components/TabLink";
 
@@ -20,6 +20,8 @@ export const AuthPage = () => {
                 <TabLink to="/auth/signin">{t("signin")}</TabLink>
                 <TabLink to="/auth/signup">{t("signup")}</TabLink>
             </div>
+
+            <Outlet />
         </div>
 
         <div className="auth-right-side"></div>
