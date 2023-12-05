@@ -9,6 +9,8 @@ import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from 'src/services/auth/jwt-auth.guard';
 import { NotesModule } from './modules/notes/notes.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { PassportModule } from '@nestjs/passport';
+import { AuthModule as MainAuthModule } from 'src/services/auth/auth.module';
 
 @Module({
   imports: [
@@ -25,6 +27,8 @@ import { AuthModule } from './modules/auth/auth.module';
       playground: true,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
     }),
+    // MainAuthModule,
+
     NotesModule,
     AuthModule,
   ],
