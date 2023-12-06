@@ -9,7 +9,7 @@ import {
   IsEnum,
   IsArray,
 } from 'class-validator';
-import { NoteStatus } from '../../../../entities/note/note.entity';
+import { NoteStatus } from '../../../entities/note/note.entity';
 
 @InputType()
 export class CreateNoteInput {

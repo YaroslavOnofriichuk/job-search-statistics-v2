@@ -1,5 +1,5 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
-import { Note } from '../../../../entities/note/note.entity';
+import { Note } from '../../../entities/note/note.entity';
 
 @ObjectType()
 export class NotesPaginationResponse {

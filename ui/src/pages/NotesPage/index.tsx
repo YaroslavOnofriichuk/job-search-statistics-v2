@@ -28,8 +28,6 @@ export function NotesPage() {
 	</Layout>)
 }
 
-// Component.displayName = "NotesPage";
-
 export const notesLoader = async () => {
     const res: ApolloQueryResult<NotesPaginationResponse> = await client.query({
 		query: GET_NOTES,

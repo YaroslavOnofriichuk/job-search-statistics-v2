@@ -4,10 +4,10 @@ import { Repository } from 'typeorm';
 import { CreateNoteInput } from './dto/create-note.input';
 import { UpdateNoteInput } from './dto/update-note.input';
 import { GetNotesArgs } from './dto/get-notes.args';
-import { Note } from '../../../entities/note/note.entity';
-import { NoteSource } from '../../../entities/note/note-source.entity';
-import { NoteTag } from '../../../entities/note/note-tag.entity';
-import { Tag } from '../../../entities/tag/tag.entity';
+import { Note } from '../../entities/note/note.entity';
+import { NoteSource } from '../../entities/note/note-source.entity';
+import { NoteTag } from '../../entities/note/note-tag.entity';
+import { Tag } from '../../entities/tag/tag.entity';
 
 const hardCodeUserId = 1
 

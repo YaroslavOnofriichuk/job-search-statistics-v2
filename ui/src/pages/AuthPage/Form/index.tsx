@@ -5,7 +5,7 @@ import * as yup from "yup";
 import { Form as FormStyled } from "./Form";
 import { Input } from "../../../components/form";
 import { Button } from "../../../components/Button";
-import { ArrowRightIcon } from "../../../components/icons";
+import { LoadingIcon } from "../../../components/icons";
 
 interface FormProps {
     onSubmit: (data: FormData) => void
@@ -23,7 +23,7 @@ export const Form = (props: FormProps) => {
         password: yup.string().min(6, t("errors.length.password")).required(t("errors.required.password")),
     }).required();
 
-    const { control, handleSubmit, formState: { errors } } = useForm<FormData>({
+    const { control, handleSubmit, formState: { errors, isSubmitting } } = useForm<FormData>({
         resolver: yupResolver(schema),
         defaultValues: {
             email: "",
@@ -72,7 +72,7 @@ export const Form = (props: FormProps) => {
             label={t("continue")}
             disabled={Object.keys(errors).length > 0}
         >
-            <ArrowRightIcon />
+            {isSubmitting && <LoadingIcon />}
         </Button>
     </FormStyled>
 };
