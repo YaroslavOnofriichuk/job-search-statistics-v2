@@ -2,6 +2,8 @@ export type Theme = "dark" | "light";
 
 export type Language = "eng" | "ukr";
 
+export type LayoutType = "dashboard" | "auth";
+
 export type NoteSource = {
     id?: number,
     name?: string,

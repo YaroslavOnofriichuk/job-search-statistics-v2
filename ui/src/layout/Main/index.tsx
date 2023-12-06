@@ -1,16 +1,22 @@
 import { ReactNode, Suspense } from "react";
+import type { LayoutType } from "../../types";
 import { Main as Wrapper } from "./Main";
 import { Burger } from "./Burger";
 import { Settings } from "./Settings";
 import { useHeaderStore } from "../../hooks";
 
-export const Main = ({ children }: { children: ReactNode }) => {
+interface Props {
+    children: ReactNode;
+    layoutType: LayoutType;
+}
+
+export const Main = ({ children, layoutType }: Props) => {
     const open = useHeaderStore(({open}) => open);
 
     return (
-        <Wrapper open={open}>
+        <Wrapper open={open} $layoutType={layoutType} >
             <section className="head">
-                <Burger />
+                {layoutType === "dashboard" && <Burger />}
                 
                 <Suspense fallback={null}>
                     <Settings />
