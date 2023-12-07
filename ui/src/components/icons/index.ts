@@ -14,6 +14,8 @@ export { EmailIcon } from "./EmailIcon";
 export { VisibleIcon } from "./VisibleIcon";
 export { UnVisibleIcon } from "./UnVisibleIcon";
 export { LoadingIcon } from "./LoadingIcon";
+export { LogInIcon } from "./LogInIcon";
+export { LogOutIcon } from "./LogOutIcon";
 
 export interface IconProps {
     size?: string;

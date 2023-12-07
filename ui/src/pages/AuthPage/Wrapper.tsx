@@ -41,8 +41,15 @@ export const Wrapper = styled.div`
         flex-direction: row;
 
         .auth-left-side {
+            flex: 1;
+            max-width: 100%;
             margin-bottom: 0;
-            margin-left: 20px;
+            margin-right: 10px;
+        }
+
+        .auth-right-side {
+            flex: 1;
+            margin-left: 10px;
         }
     }
 `;

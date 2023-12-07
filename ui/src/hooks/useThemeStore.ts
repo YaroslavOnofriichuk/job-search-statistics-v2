@@ -18,5 +18,8 @@ const defaultTheme = (): Theme => {
 
 export const useThemeStore = create<ThemeState>((set) => ({
     theme: defaultTheme(),
-    changeTheme: (theme: Theme) => set(() => ({ theme })),
+    changeTheme: (theme: Theme) => {
+        localStorage.setItem("theme", theme);
+        set(() => ({ theme }));
+    },
 }));

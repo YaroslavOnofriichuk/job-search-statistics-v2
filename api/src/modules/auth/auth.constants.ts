@@ -4,11 +4,11 @@ export const jwtConstants = {
     access: {
         secret: process.env.JWT_SECRET,
         subject: 'access',
-        expiresIn: '30m',
+        expiresIn: '30s',
     },
     refresh: {
         secret: process.env.JWT_SECRET,
         subject: 'refresh',
-        expiresIn: '30d',
+        expiresIn: '60s',
     },
   };

@@ -1,5 +1,7 @@
 {
     "title": "Settings",
     "theme": "Theme",
-    "language": "language"
+    "language": "language",
+    "logOut": "Log out",
+    "logIn": "Log in"
 }

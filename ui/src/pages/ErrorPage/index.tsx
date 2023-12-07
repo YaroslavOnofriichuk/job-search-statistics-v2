@@ -1,49 +1,57 @@
-import { isRouteErrorResponse, useRouteError } from "react-router-dom";
+import {
+    isRouteErrorResponse,
+    useRouteError,
+} from "react-router-dom";
 import { Layout } from "../../layout";
+import { useEffect, useState } from "react";
+import { useAuthStore } from "../../hooks";
 
 export const ErrorPage = () => {
+    const [message, setMessage] = useState("");
+    const { setIsLoggedIn } = useAuthStore();
     const error = useRouteError();
-    console.error("=============", error);
 
-    if (isRouteErrorResponse(error)) {
-        if (error.status === 404) {
-            return (
-                <Layout>
-                    <div>This page doesn't exist!</div>
-                </Layout>
-            );
+    useEffect(() => {
+        //@ts-ignore
+        if (error?.message === "UNAUTHORISED") {
+            setIsLoggedIn(false);
         }
 
-        if (error.status === 401) {
-            return (
-                <Layout>
-                    <div>You aren't authorized to see this</div>
-                </Layout>
-            );
+        if (isRouteErrorResponse(error)) {
+            switch (error.status) {
+                case 404:
+                    setMessage("This page doesn't exist!");
+                    break;
+    
+                case 401:
+                    setMessage("You aren't authorized to see this");
+                    break;
+    
+                case 500:
+                    setMessage("Looks like our API is down");
+                    break;
+    
+                case 418:
+                    setMessage("🫖");
+                    break;
+    
+                default:
+                    break;
+            }
         }
 
-        if (error.status === 500) {
-            return (
-                <Layout>
-                    <div>Looks like our API is down</div>
-                </Layout>
-            );
-        }
-
-        if (error.status === 418) {
-            return (
-                <Layout>
-                    <div>🫖</div>
-                </Layout>
-            );
-        }
-    }
+        //@ts-ignore
+    }, [error, error?.message, setIsLoggedIn]);
 
     return (
         <Layout>
             <div id="error-page">
                 <h1>Oops!</h1>
-                <p>Sorry, an unexpected error has occurred.</p>
+                <p>
+                    {message
+                        ? message
+                        : "Sorry, an unexpected error has occurred."}
+                </p>
             </div>
         </Layout>
     );

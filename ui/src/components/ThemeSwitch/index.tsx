@@ -4,12 +4,11 @@ import { Switch } from "./Switch";
 import { SunIcon, MoonIcon } from "../icons";
 
 export const ThemeSwitch = () => {
-    const theme = useThemeStore(({theme}) => theme);
+    const { theme, changeTheme } = useThemeStore();
     const { t } = useTranslation("components/theme-switch");
 
     const handleClick = () => {
-        useThemeStore.setState({ theme: theme === "dark" ? "light" : "dark" });
-        localStorage.setItem("theme", theme === "dark" ? "light" : "dark");
+        changeTheme(theme === "dark" ? "light" : "dark");
     };
 
     return <Switch $isDark={theme === "dark"} onClick={handleClick}>

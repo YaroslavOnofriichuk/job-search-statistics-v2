@@ -41,7 +41,7 @@ const errorLink = onError(
 
                                     if (!accessToken) {
                                         throw new GraphQLError(
-                                            "Empty AccessToken"
+                                            "UNAUTHORISED"
                                         );
                                     }
 
