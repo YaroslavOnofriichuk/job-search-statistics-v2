@@ -2,18 +2,19 @@ import styled from "styled-components";
 
 interface WrapperProps {
     size?: "small" | "big",
+    $error?: boolean,
 }
 
 export const Wrapper = styled.div<WrapperProps>`
     width: 100%;
     max-width: ${({ size }) => (size === "big" ? "350px" : "85px")};
     height: ${({ size }) => (size === "big" ? "60px" : "35px")};
-    border: 2px solid ${({ theme }) => theme.colors.body.primary};
+    border: 2px solid ${({ theme, $error }) => $error ? theme.colors.text.error : theme.colors.body.primary};
     border-radius: ${({ size }) => (size === "big" ? "25px" : "14px")};
     background: ${({ theme }) => theme.colors.body.primary};
-    color: ${({ theme }) => theme.colors.text.primary};
-    /* position: relative;
-    z-index: 1; */
+    color: ${({ theme, $error }) => $error ? theme.colors.text.error : theme.colors.text.primary};
+    position: relative;
+    z-index: 1;
     display: flex;
     align-items: center;
     padding: ${({ size }) => (size === "big" ? "12px" : "7px 12px")};
@@ -36,7 +37,7 @@ export const Wrapper = styled.div<WrapperProps>`
             align-items: center;
 
             & svg {
-                fill: ${({ theme }) => theme.colors.text.primary};
+                fill: ${({ theme, $error }) => $error ? theme.colors.text.error : theme.colors.text.primary};
                 transition: .5s;
             }
         }
@@ -54,7 +55,7 @@ export const Wrapper = styled.div<WrapperProps>`
             display: block;
             width: 2px;
             height: 13px;
-            background-color: ${({ theme }) => theme.colors.text.secondary};
+            background-color: ${({ theme, $error }) => $error ? theme.colors.text.error : theme.colors.text.secondary};
         }
     }
 
@@ -62,13 +63,29 @@ export const Wrapper = styled.div<WrapperProps>`
         background: transparent;
         border: none;
         outline: none;
-        color: ${({ theme }) => theme.colors.text.primary};
+        color: ${({ theme, $error }) => $error ? theme.colors.text.error : theme.colors.text.primary};
         font-family: 'Oswald', sans-serif;
         font-size: 14px;
+        transition: .5s;
 
         &::placeholder {
-            color: ${({ theme }) => theme.colors.text.secondary};
+            color: ${({ theme, $error }) => $error ? theme.colors.text.error : theme.colors.text.secondary};
         }
+
+        &:-internal-autofill-selected {
+            background-image: none !important;
+            background-color: transparent !important;
+            color: ${({ theme, $error }) => $error ? theme.colors.text.error : theme.colors.text.primary} !important;
+        }
+    }
+
+    & p {
+        font-size: 10px;
+        font-weight: 400;
+        color: ${({ theme }) => theme.colors.text.error};
+        position: absolute;
+        left: 64px;
+        bottom: 5px;
     }
 
     & input[type="search"]::-webkit-search-decoration,

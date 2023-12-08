@@ -6,7 +6,7 @@ import {
   IsEnum,
   IsString,
 } from 'class-validator';
-import { NoteStatus } from '../../../../entities/note/note.entity';
+import { NoteStatus } from '../../../entities/note/note.entity';
 
 enum SortType {
   ASC = "ASC",

@@ -8,23 +8,23 @@ import {
 
 export const config = [
     {
-        path: "home",
+        path: "/home",
         icon: HomeIcon,
     },
     {
-        path: "notes",
+        path: "/notes",
         icon: ListIcon,
     },
     {
-        path: "statistic",
+        path: "/statistic",
         icon: StatisticIcon,
     },
     {
-        path: "calendar",
+        path: "/calendar",
         icon: CalendarIcon,
     },
     {
-        path: "user",
+        path: "/user",
         icon: UserIcon,
     },
 ];

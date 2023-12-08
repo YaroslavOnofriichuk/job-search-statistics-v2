@@ -79,6 +79,14 @@ type NotesPaginationResponse {
   nextPage: Int
 }
 
+type AuthResponse {
+  """JWT access token"""
+  accessToken: String!
+
+  """JWT refresh token"""
+  refreshToken: String!
+}
+
 type Query {
   notes(getNotesArgs: GetNotesArgs!): NotesPaginationResponse!
   note(id: Int!): Note!
@@ -105,6 +113,9 @@ type Mutation {
   createNote(createNoteInput: CreateNoteInput!): Note!
   updateNote(updateNoteInput: UpdateNoteInput!): Note!
   removeNote(id: Int!): Note!
+  register(authInput: AuthInput!): AuthResponse!
+  login(authInput: AuthInput!): AuthResponse!
+  refresh(refreshInput: RefreshInput!): AuthResponse!
 }
 
 input CreateNoteInput {
@@ -158,4 +169,17 @@ input UpdateNoteInput {
   """Note tags"""
   tags: [Int!]
   id: ID!
+}
+
+input AuthInput {
+  """Email"""
+  email: String!
+
+  """Password"""
+  password: String!
+}
+
+input RefreshInput {
+  """JWT refresh token"""
+  refreshToken: String!
 }

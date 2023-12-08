@@ -4,12 +4,10 @@ import { Repository } from 'typeorm';
 import { CreateNoteInput } from './dto/create-note.input';
 import { UpdateNoteInput } from './dto/update-note.input';
 import { GetNotesArgs } from './dto/get-notes.args';
-import { Note } from '../../../entities/note/note.entity';
-import { NoteSource } from '../../../entities/note/note-source.entity';
-import { NoteTag } from '../../../entities/note/note-tag.entity';
-import { Tag } from '../../../entities/tag/tag.entity';
-
-const hardCodeUserId = 1
+import { Note } from '../../entities/note/note.entity';
+import { NoteSource } from '../../entities/note/note-source.entity';
+import { NoteTag } from '../../entities/note/note-tag.entity';
+import { Tag } from '../../entities/tag/tag.entity';
 
 @Injectable()
 export class NotesService {
@@ -24,8 +22,8 @@ export class NotesService {
     private readonly tagsRepository: Repository<Tag>,
   ) {}
 
-  async create(dto: CreateNoteInput) {
-    const source = await this.saveSource(hardCodeUserId, dto.source);
+  async create(dto: CreateNoteInput, userId: number) {
+    const source = await this.saveSource(userId, dto.source);
 
     const note = await this.notesRepository.save({
       position: dto.position,
@@ -33,21 +31,21 @@ export class NotesService {
       link: dto.link,
       description: dto.description,
       status: dto.status,
-      userId: hardCodeUserId,
+      userId,
       sourceId: source.id,
     });
 
     if (dto.tags?.length > 0) {
-      this.saveTags(hardCodeUserId, dto.tags, note.id);
+      this.saveTags(userId, dto.tags, note.id);
     }
 
     return note
   }
 
-  async findAll(args: GetNotesArgs) {
+  async findAll(args: GetNotesArgs, userId: number) {
     const qb = this.notesRepository.createQueryBuilder("note")
       .leftJoinAndSelect("note.source", "source")
-      .where("note.userId = :userId", { userId: hardCodeUserId })
+      .where("note.userId = :userId", { userId })
 
     if (args.search?.trim()) {
       qb.andWhere(`LOWER(note.position) ~* LOWER(:value)`, { value: args.search })
@@ -86,15 +84,15 @@ export class NotesService {
     }
   }
 
-  async findOne(id: number) {
+  async findOne(id: number, userId: number) {
     return await this.notesRepository.findOne({
-      where: { id, userId: hardCodeUserId },
+      where: { id, userId },
     });
   }
 
-  async update(id: number, dto: UpdateNoteInput) {
+  async update(id: number, dto: UpdateNoteInput, userId: number) {
     const note = await this.notesRepository.findOne({
-      where: { id, userId: hardCodeUserId },
+      where: { id, userId },
     });
     if (!note) {
       throw new BadRequestException("Note with provided id does not exist");
@@ -102,7 +100,7 @@ export class NotesService {
 
     let source: NoteSource;
     if (dto.source) {
-      source = await this.saveSource(hardCodeUserId, dto.source);
+      source = await this.saveSource(userId, dto.source);
     }
 
     const updatedNote = await this.notesRepository.save({
@@ -113,18 +111,18 @@ export class NotesService {
       description: dto.description ? dto.description : note.description,
       status: dto.status ? dto.status : note.status,
       sourceId: source ? source.id : note.sourceId,
-      userId: hardCodeUserId,
+      userId,
     });
 
     if (dto.tags?.length > 0) {
-      this.saveTags(hardCodeUserId, dto.tags, id);
+      this.saveTags(userId, dto.tags, id);
     }
 
     return updatedNote;
   }
 
-  async remove(id: number) {
-    return await this.notesRepository.delete({ id, userId: hardCodeUserId });
+  async remove(id: number, userId: number) {
+    return await this.notesRepository.delete({ id, userId });
   }
 
   async saveSource(userId: number, name: string): Promise<NoteSource> {

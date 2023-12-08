@@ -1,29 +1,25 @@
-import { ReactNode, useLayoutEffect } from "react";
+import { ReactNode } from "react";
 import { ThemeProvider } from "styled-components";
+import type { LayoutType } from "../types";
 import { GlobalStyle } from "./GlobalStyle";
 import { theme as stylesTheme } from "./theme";
 import { Header } from "./Header";
 import { Main } from "./Main";
 import { useThemeStore } from "../hooks";
 
-export const Layout = ({ children }: { children: ReactNode}) => {
-    const theme = useThemeStore(({theme}) => theme);
+interface Props {
+    children: ReactNode;
+    type?: LayoutType;
+}
 
-    useLayoutEffect(() => {
-        const themeFromLocalStorage = localStorage.getItem("theme");
-        const browserTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
-            ? "dark"
-            : "light";
-        const theme = themeFromLocalStorage ? themeFromLocalStorage : browserTheme;
-        //@ts-ignore
-        useThemeStore.setState({ theme })
-    }, [])
+export const Layout = ({ children, type = "dashboard" }: Props) => {
+    const theme = useThemeStore(({theme}) => theme);
 
     return (
         <ThemeProvider theme={stylesTheme[theme]}>
             <GlobalStyle />
-            <Header />
-            <Main>
+            {type === "dashboard" && <Header />}
+            <Main layoutType={type}>
                 {children}
             </Main>
         </ThemeProvider>

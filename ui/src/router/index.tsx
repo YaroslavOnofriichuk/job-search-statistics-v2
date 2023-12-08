@@ -1,10 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import { ErrorPage } from "../pages/ErrorPage";
 import App from "../App";
-import { HomePage } from "../pages/HomePage";
-import { CalendarPage } from "../pages/CalendarPage";
-import { StatisticPage } from "../pages/StatisticPage";
-import { NotesPage, notesLoader } from "../pages/NotesPage";
+import { AuthPage } from "../pages/AuthPage";
+import { Login } from "../pages/AuthPage/Login";
+import { Register } from "../pages/AuthPage/Register";
+import { PublicRoute } from "./PublicRoute";
+import { PrivateRoute } from "./PrivateRoute";
 
 export const router = createBrowserRouter([
     {
@@ -13,25 +14,52 @@ export const router = createBrowserRouter([
         errorElement: <ErrorPage />,
         children: [
             {
-                path: "home",
-                element: <HomePage />,
-                errorElement: <ErrorPage />,
+                element: <PrivateRoute />,
+                children: [
+                    {
+                        path: "home",
+                        lazy: () => import("../pages/HomePage"),
+                    },
+                    {
+                        path: "notes",
+                        async lazy() {
+                            const { notesLoader, NotesPage } = await import(
+                              "../pages/NotesPage"
+                            );
+                            return {
+                              loader: notesLoader,
+                              Component: NotesPage,
+                            };
+                          },
+                    },
+                    {
+                        path: "calendar",
+                        lazy: () => import("../pages/CalendarPage"),
+                    },
+                    {
+                        path: "statistic",
+                        lazy: () => import("../pages/StatisticPage"),
+                    },
+                ],
             },
             {
-                path: "notes",
-                element: <NotesPage />,
-                errorElement: <ErrorPage />,
-                loader: notesLoader,
-            },
-            {
-                path: "calendar",
-                element: <CalendarPage />,
-                errorElement: <ErrorPage />,
-            },
-            {
-                path: "statistic",
-                element: <StatisticPage />,
-                errorElement: <ErrorPage />,
+                element: <PublicRoute />,
+                children: [
+                    {
+                        path: "auth",
+                        element: <AuthPage />,
+                        children: [
+                            {
+                                path: "signin",
+                                element: <Login />,
+                            },
+                            {
+                                path: "signup",
+                                element: <Register />,
+                            },
+                        ]
+                    },
+                ],
             },
         ],
     },

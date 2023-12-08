@@ -1,12 +1,14 @@
 import styled from 'styled-components';
+import type { LayoutType } from '../../types';
 
 interface MainProps {
     open: boolean;
+    $layoutType: LayoutType;
 }
 
 export const Main = styled.main<MainProps>`
     transition: .5s;
-    padding-left: ${props => (props.open ? "252px" : "0px")};
+    padding-left: ${props => (props.$layoutType === "dashboard" ? (props.open ? "252px" : "0px") : "0px")};
     width: 100vw;
     overflow: hidden;
 
@@ -30,7 +32,7 @@ export const Main = styled.main<MainProps>`
     }
 
     @media (min-width: 767px) {
-        padding-left: ${props => (props.open ? "252px" : "108px")};
+        padding-left: ${props => (props.$layoutType === "dashboard" ? (props.open ? "252px" : "108px") : "0px")};
 
         .head {
             padding: 0 20px;

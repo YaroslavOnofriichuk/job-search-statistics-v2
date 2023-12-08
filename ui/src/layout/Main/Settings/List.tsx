@@ -32,6 +32,12 @@ export const List = styled.ul`
         transition: .5s;
 
         div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        div:last-of-type {
             margin-left: 10px;
             display: flex;
             justify-content: center;
@@ -44,7 +50,7 @@ export const List = styled.ul`
         }
 
         &:active {
-            p {
+            p, div:first-child {
                 animation-name: ${move};
                 animation-duration: 1s;
                 animation-iteration-count: 1;
