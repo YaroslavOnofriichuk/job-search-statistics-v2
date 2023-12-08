@@ -10,6 +10,7 @@ export const Link = styled(NavLink)`
     align-items: center;
 
     width: 100%;
+    max-width: 150px;
     height: 50px;
     padding: 7px 18px;
     border: 2px solid ${({ theme }) => theme.colors.body.primary};

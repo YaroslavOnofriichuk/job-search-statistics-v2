@@ -1,4 +1,4 @@
-import { InputType, Field, Int } from '@nestjs/graphql';
+import { InputType, Field } from '@nestjs/graphql';
 import {
   IsDate,
   IsNotEmpty,
@@ -55,6 +55,6 @@ export class CreateNoteInput {
 
   @IsOptional()
   @IsArray()
-  @Field(() => [Int], { description: 'Note tags', nullable: true })
+  @Field(() => [String], { description: 'Note tags', nullable: true })
   tags: string[];
 }

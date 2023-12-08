@@ -9,6 +9,11 @@ export type NoteSource = {
     name?: string,
 }
 
+export type Tag = {
+    id?: number,
+    tag?: string,
+}
+
 export enum NoteStatus {
     ACCEPTED = 'ACCEPTED',
     REJECTED = 'REJECTED',
