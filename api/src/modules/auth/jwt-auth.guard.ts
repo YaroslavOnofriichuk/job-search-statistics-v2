@@ -15,7 +15,6 @@ export class JwtAuthGuard extends AuthGuard("jwt") {
     }
 
     canActivate(context: ExecutionContext) {
-        console.log("========JwtAuthGuard=canActivate==========")
         const isPublic =
             this.reflector.getAllAndOverride(PublicKey, [
                 context.getClass(),
@@ -28,13 +27,10 @@ export class JwtAuthGuard extends AuthGuard("jwt") {
 
     getRequest(context: ExecutionContext) {
         const ctx = GqlExecutionContext.create(context);
-        console.log("========JwtAuthGuard=getRequest==========")
         return ctx.getContext().req;
     }
 
     handleRequest(err, user, info) {
-        console.log("========JwtAuthGuard=handleRequest==========", err, user, info)
-        // You can throw an exception based on either "info" or "err" arguments
         if (err || !user) {
             throw err || new UnauthorizedException();
         }

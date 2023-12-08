@@ -15,7 +15,7 @@ const httpLink = createHttpLink({
     uri: import.meta.env.VITE_API_HOST + "/graphql",
 });
 
-const authLink = setContext((operation, { headers }) => {
+const authLink = setContext((_, { headers }) => {
     const token = localStorage.getItem("accessToken");
 
     return {
@@ -30,6 +30,7 @@ const errorLink = onError(
     ({ graphQLErrors, networkError, operation, forward }) => {
         if (graphQLErrors) {
             for (const err of graphQLErrors) {
+                console.error("[GraphQL error]: ", err, operation)
                 if (err.extensions.code === "UNAUTHENTICATED") {
                     if (operation.operationName === "Refresh") return;
 
@@ -40,9 +41,7 @@ const errorLink = onError(
                                     const accessToken = await refreshToken();
 
                                     if (!accessToken) {
-                                        throw new GraphQLError(
-                                            "UNAUTHORISED"
-                                        );
+                                        throw new GraphQLError("UNAUTHORISED");
                                     }
 
                                     const subscriber = {
@@ -65,7 +64,7 @@ const errorLink = onError(
             }
         }
 
-        if (networkError) console.log(`[Network error]: ${networkError}`);
+        if (networkError) console.error("[Network error]: ", networkError, operation);
     }
 );
 
@@ -78,7 +77,7 @@ async function refreshToken() {
     try {
         const refreshResolverResponse = await client.mutate({
             mutation: REFRESH,
-            variables: { refreshToken: localStorage.getItem("refreshToken") }
+            variables: { refreshToken: localStorage.getItem("refreshToken") || "" }
         });
         const accessToken =
             refreshResolverResponse.data?.refresh?.accessToken;
@@ -90,6 +89,6 @@ async function refreshToken() {
             return accessToken;
         }
     } catch (err) {
-        console.error(err);
+        console.error("[Refresh error]: ", err);
     }
 }

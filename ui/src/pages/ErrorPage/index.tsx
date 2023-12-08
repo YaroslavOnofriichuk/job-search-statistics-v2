@@ -1,5 +1,6 @@
 import {
     isRouteErrorResponse,
+    useNavigate,
     useRouteError,
 } from "react-router-dom";
 import { Layout } from "../../layout";
@@ -10,11 +11,13 @@ export const ErrorPage = () => {
     const [message, setMessage] = useState("");
     const { setIsLoggedIn } = useAuthStore();
     const error = useRouteError();
+    const navigate = useNavigate();
 
     useEffect(() => {
         //@ts-ignore
         if (error?.message === "UNAUTHORISED") {
             setIsLoggedIn(false);
+            navigate("/auth/signin");
         }
 
         if (isRouteErrorResponse(error)) {
@@ -41,7 +44,7 @@ export const ErrorPage = () => {
         }
 
         //@ts-ignore
-    }, [error, error?.message, setIsLoggedIn]);
+    }, [error, error?.message, setIsLoggedIn, navigate]);
 
     return (
         <Layout>
