@@ -45,3 +45,8 @@ export type NotesPaginationResponse = {
     prevPage?: number,
     nextPage?: number,
 }
+
+export type ToastProps = {
+    status: "error" | "success";
+    text: string;
+}

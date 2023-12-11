@@ -72,11 +72,14 @@ export const Wrapper = styled.div<WrapperProps>`
             color: ${({ theme, $error }) => $error ? theme.colors.text.error : theme.colors.text.secondary};
         }
 
-        &:-internal-autofill-selected {
-            background-image: none !important;
-            background-color: transparent !important;
-            color: ${({ theme, $error }) => $error ? theme.colors.text.error : theme.colors.text.primary} !important;
+        &:-webkit-autofill,
+        &:-webkit-autofill:hover, 
+        &:-webkit-autofill:focus, 
+        &:-webkit-autofill:active{
+            -webkit-box-shadow: 0 0 0 30px ${({ theme }) => theme.colors.body.primary} inset !important;
+            -webkit-text-fill-color: ${({ theme }) => theme.colors.text.primary} !important;
         }
+
     }
 
     & p {
