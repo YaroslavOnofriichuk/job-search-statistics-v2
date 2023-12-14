@@ -6,7 +6,6 @@ interface ModalProps {
 
 export const Window = styled.div<ModalProps>`
     position: fixed;
-    z-index: 3;
     background-color: rgba(0, 0, 0, 0.5);
     top: 0;
     left: 0;
@@ -15,7 +14,7 @@ export const Window = styled.div<ModalProps>`
     opacity: ${props => (props.open ? 1 : 0)};
     visibility: ${props => (props.open ? "visible" : "hidden")};
     pointer-events: ${props => (props.open ? "auto" : "none")};;
-    transition: opasity 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
         visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
     .modal-main {

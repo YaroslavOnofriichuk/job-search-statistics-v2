@@ -18,6 +18,7 @@ export const Main = styled.main<MainProps>`
         padding: 0 10px;
         background-color: ${props => props.theme.colors.body.primary};
         position: sticky;
+        z-index: 1000;
         top: 0;
         right: 0;
 

@@ -14,7 +14,6 @@ export const Wrapper = styled.div<WrapperProps>`
     background: ${({ theme }) => theme.colors.body.primary};
     color: ${({ theme, $error }) => $error ? theme.colors.text.error : theme.colors.text.primary};
     position: relative;
-    z-index: 1;
     display: flex;
     align-items: center;
     padding: ${({ size }) => (size === "big" ? "12px" : "7px 12px")};

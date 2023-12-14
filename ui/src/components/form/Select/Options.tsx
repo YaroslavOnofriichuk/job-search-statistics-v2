@@ -22,7 +22,7 @@ export const Options = styled.ul<OptionsProps>`
     position: absolute;
     top: ${({ size }) => (size === "big" ? "60px" : "35px")};
     left: 0;
-    z-index: 2;
+    z-index: 1;
     padding: ${({ size }) => (size === "big" ? "12px" : "7px 12px")};
     transition: .5s;
 

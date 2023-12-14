@@ -2,7 +2,7 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useTranslation } from "react-i18next";
 import * as yup from "yup";
-import { Input, Form as FormStyled, Select } from "../../../components/form";
+import { Input, Form as FormStyled, Select, DatePicker } from "../../../components/form";
 import { Button } from "../../../components/Button";
 import { LoadingIcon } from "../../../components/icons";
 import { NoteStatus } from "../../../types";
@@ -20,7 +20,8 @@ export type FormData = {
     source: string;
     description?: string;
     status: NoteStatus;
-    createdAt?: Date;
+    createdAt: Date;
+    tags?: string[];
 };
 
 type LoaderData = {
@@ -53,7 +54,8 @@ export const Form = (props: FormProps) => {
                 .string()
                 .oneOf(Object.values(NoteStatus))
                 .required(t("errors.required.status")),
-            createdAt: yup.date().optional(),
+            createdAt: yup.date().required(t("errors.required.createdAt")),
+            tags: yup.array().optional(),
         })
         .required();
 
@@ -70,6 +72,7 @@ export const Form = (props: FormProps) => {
             description: "",
             status: NoteStatus.SENT,
             createdAt: new Date(),
+            tags: [],
         },
     });
 
@@ -159,6 +162,23 @@ export const Form = (props: FormProps) => {
                     />
                 )}
             />}
+
+            <Controller
+                name="createdAt"
+                control={control}
+                render={({ field }) => (
+                    <DatePicker
+                        onChange={field.onChange}
+                        name={field.name}
+                        value={field.value}
+                        error={!!errors.createdAt}
+                        helperText={
+                            errors.createdAt ? errors.createdAt?.message : null
+                        }
+                        placeholder={t("fields.createdAt")}
+                    />
+                )}
+            />
 
             <Button
                 type="submit"
