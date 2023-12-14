@@ -30,6 +30,8 @@ export const Wrapper = styled.div<WrapperProps>`
         background: transparent;
         margin-right: 20px;
         position: relative;
+        width: 36px;
+        height: 26px;
 
         & div {
             display: flex;
@@ -47,10 +49,10 @@ export const Wrapper = styled.div<WrapperProps>`
             pointer-events: none;
         }
 
-        &::after { 
+        &:not([disabled])::after { 
             content: "";
             position: absolute;
-            top: 5px;
+            top: 7px;
             right: -10px;
             display: block;
             width: 2px;
@@ -108,6 +110,14 @@ export const Wrapper = styled.div<WrapperProps>`
 
         & input {
             color: ${({ theme }) => theme.colors.text.secondary};
+
+            &:-webkit-autofill,
+            &:-webkit-autofill:hover, 
+            &:-webkit-autofill:focus, 
+            &:-webkit-autofill:active{
+                -webkit-box-shadow: 0 0 0 30px ${({ theme }) => theme.colors.body.secondary} inset !important;
+                -webkit-text-fill-color: ${({ theme }) => theme.colors.text.primary} !important;
+            }
         }
     }
 `;
