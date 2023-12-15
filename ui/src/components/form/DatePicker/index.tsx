@@ -1,16 +1,23 @@
-import { UIEvent, useEffect, useState } from "react";
+import { UIEvent, useEffect, useRef, useState } from "react";
 import { Picker } from "./Picker";
-import { generateYears, generateDays } from "./helpers";
+import { generateYears, generateDays, calculateStartPosition } from "./helpers";
 import { formatDate } from "../../../helpers";
 
 interface Props {
     error?: boolean;
     helperText?: string | null;
     value: Date;
-    onChange: (event: any) => void;
+    onChange: (event: Event) => void;
     name: string;
     placeholder: string;
 }
+
+type Event = {
+    target: {
+        value: Date,
+        name: string,
+    }
+};
 
 type StateType = {
     day: number;
@@ -33,6 +40,32 @@ export const DatePicker = (props: Props) => {
     const [days, setDays] = useState<Date[]>(() =>
         generateDays(props.value.getMonth() + 1, props.value.getFullYear())
     );
+    const dayRef = useRef<HTMLUListElement>(null);
+    const monthRef = useRef<HTMLUListElement>(null);
+    const yearRef = useRef<HTMLUListElement>(null);
+    const hourRef = useRef<HTMLUListElement>(null);
+    const minuteRef = useRef<HTMLUListElement>(null);
+
+    const onMountScroll = (defaultValue: number, element: HTMLUListElement | null) => {
+        if (element) {
+            element.scrollTo({
+                top: calculateStartPosition(
+                    element,
+                    defaultValue,
+                ),
+                behavior: "smooth",
+            });
+        }
+    };
+
+    useEffect(() => {
+        onMountScroll(props.value.getDate(), dayRef.current);
+        onMountScroll(props.value.getMonth() + 1, monthRef.current);
+        onMountScroll(props.value.getFullYear() + 1, yearRef.current);
+        onMountScroll(props.value.getHours(), hourRef.current);
+        onMountScroll(props.value.getMinutes(), minuteRef.current);
+        // eslint-disable-next-line
+    }, []);
 
     useEffect(() => {
         setDays(generateDays(currentDate.month, currentDate.year));
@@ -85,7 +118,7 @@ export const DatePicker = (props: Props) => {
         <Picker $error={props.error}>
             <div className="picker-window"></div>
             <div className="picker-triangle"></div>
-            <ul aria-label="day" onScroll={handleScroll}>
+            <ul aria-label="day" onScroll={handleScroll} ref={dayRef}>
                 {days.map((day) => (
                     <li
                         key={day.getDate()}
@@ -95,21 +128,21 @@ export const DatePicker = (props: Props) => {
                     </li>
                 ))}
             </ul>
-            <ul aria-label="month" onScroll={handleScroll}>
+            <ul aria-label="month" onScroll={handleScroll} ref={monthRef}>
                 {Array.from({ length: 12 }).map((_, index) => (
                     <li key={index} aria-label={(index + 1).toString()}>
                         {formatDate(new Date(currentDate.year, index), "MMM")}
                     </li>
                 ))}
             </ul>
-            <ul aria-label="year" onScroll={handleScroll}>
+            <ul aria-label="year" onScroll={handleScroll} ref={yearRef}>
                 {generateYears(currentDate.year).map((year) => (
                     <li key={year} aria-label={year.toString()}>
                         {year}
                     </li>
                 ))}
             </ul>
-            <ul aria-label="hour" onScroll={handleScroll}>
+            <ul aria-label="hour" onScroll={handleScroll} ref={hourRef}>
                 {Array.from({ length: 24 }).map((_, index) => (
                     <li key={index} aria-label={index.toString()}>
                         {index.toString().padStart(2, "0")}
@@ -117,7 +150,7 @@ export const DatePicker = (props: Props) => {
                 ))}
             </ul>
             <span>:</span>
-            <ul aria-label="minute" onScroll={handleScroll}>
+            <ul aria-label="minute" onScroll={handleScroll} ref={minuteRef}>
                 {Array.from({ length: 60 }).map((_, index) => (
                     <li key={index} aria-label={index.toString()}>
                         {index.toString().padStart(2, "0")}

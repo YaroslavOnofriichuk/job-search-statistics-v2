@@ -16,7 +16,7 @@ type Event = {
     }
 };
 
-interface SelectProps {
+interface AutocompleteProps {
     name: string;
     placeholder?: string;
     value: string;
@@ -27,7 +27,7 @@ interface SelectProps {
     helperText?: string | null;
 }
 
-export const Select = (props: SelectProps) => {
+export const Autocomplete = (props: AutocompleteProps) => {
     const [open, setOpen] = useState(false);
     const ref = useOutsideClick<HTMLUListElement>(() => setOpen(false));
 

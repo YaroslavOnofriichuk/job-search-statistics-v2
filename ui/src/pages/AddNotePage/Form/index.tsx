@@ -2,7 +2,7 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useTranslation } from "react-i18next";
 import * as yup from "yup";
-import { Input, Form as FormStyled, Select, DatePicker } from "../../../components/form";
+import { Input, Form as FormStyled, Select, DatePicker, TextArea } from "../../../components/form";
 import { Button } from "../../../components/Button";
 import { LoadingIcon } from "../../../components/icons";
 import { NoteStatus } from "../../../types";
@@ -17,6 +17,7 @@ interface FormProps {
 export type FormData = {
     position: string;
     company: string;
+    link: string;
     source: string;
     description?: string;
     status: NoteStatus;
@@ -44,6 +45,11 @@ export const Form = (props: FormProps) => {
                 .string()
                 .max(128, t("errors.length.company"))
                 .required(t("errors.required.company")),
+            link: yup
+                .string()
+                .url(t("errors.valid.link"))
+                .max(256, t("errors.length.link"))
+                .required(t("errors.required.link")),
             source: yup
                 .string()
                 .max(128, t("errors.length.source"))
@@ -73,6 +79,7 @@ export const Form = (props: FormProps) => {
             status: NoteStatus.SENT,
             createdAt: new Date(),
             tags: [],
+            link: "",
         },
     });
 
@@ -112,6 +119,25 @@ export const Form = (props: FormProps) => {
                             errors.company ? errors.company?.message : null
                         }
                         placeholder={t("fields.company")}
+                    />
+                )}
+            />
+
+            <Controller
+                name="link"
+                control={control}
+                render={({ field }) => (
+                    <Input
+                        type="url"
+                        size="big"
+                        onChange={field.onChange}
+                        name={field.name}
+                        value={field.value}
+                        error={!!errors.link}
+                        helperText={
+                            errors.link ? errors.link?.message : null
+                        }
+                        placeholder={t("fields.link")}
                     />
                 )}
             />
@@ -179,6 +205,25 @@ export const Form = (props: FormProps) => {
                     />
                 )}
             />
+
+            <Controller
+                name="description"
+                control={control}
+                render={({ field }) => (
+                    <TextArea
+                        onChange={field.onChange}
+                        name={field.name}
+                        value={field.value || ""}
+                        error={!!errors.description}
+                        helperText={
+                            errors.description ? errors.description?.message : null
+                        }
+                        placeholder={t("fields.description")}
+                    />
+                )}
+            />
+
+            <input type="tel" />
 
             <Button
                 type="submit"
