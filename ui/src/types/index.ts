@@ -10,8 +10,13 @@ export type NoteSource = {
 }
 
 export type Tag = {
-    id?: number,
-    tag?: string,
+    id: number,
+    tag: string,
+}
+
+export type NoteTag = {
+    id: number,
+    tag: Tag,
 }
 
 export enum NoteStatus {
@@ -34,6 +39,14 @@ export type Note = {
     status?: NoteStatus,
     createdAt?: Date,
     updatedAt?: Date,
+    tags?: NoteTag[],
+}
+
+export type StatusHistory = {
+    id: number,
+    description: string,
+    status: NoteStatus,
+    createdAt: Date,
 }
 
 export type NotesPaginationResponse = {

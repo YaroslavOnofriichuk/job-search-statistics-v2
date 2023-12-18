@@ -32,7 +32,7 @@ type LoaderData = {
 
 export const Form = (props: FormProps) => {
     const { t } = useTranslation("pages/add-note");
-    const { tags, sources } = useLoaderData() as LoaderData;
+    const { sources } = useLoaderData() as LoaderData;
     const [isShowSource, setIsShowSource] = useState(false);
 
     const schema = yup
@@ -222,8 +222,6 @@ export const Form = (props: FormProps) => {
                     />
                 )}
             />
-
-            <input type="tel" />
 
             <Button
                 type="submit"

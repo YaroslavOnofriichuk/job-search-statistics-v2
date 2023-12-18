@@ -17,7 +17,7 @@ export type Action =
 
 export const initialState: TableState = {
     page: 1,
-    limit: 2,
+    limit: 10,
     sort: "DESC",
 };
 

@@ -7,6 +7,5 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
   app.enableCors({ origin: process.env.UI_HOST });
   await app.listen(process.env.API_PORT);
-  console.log(`Application is running on: ${await app.getUrl()}`);
 }
 bootstrap();

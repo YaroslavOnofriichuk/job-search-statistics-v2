@@ -1,0 +1,24 @@
+{
+    "goBack": "Назад",
+    "fields": {
+        "position": "Посада",
+        "company": "Компанія",
+        "link": "Посилання",
+        "source": "Джерело",
+        "createdAt": "Надіслано",
+        "description": "Опис",
+        "status": "Статус",
+        "tags": "Теги"
+    },
+    "save": "Зберегти",
+    "delete": "Видалити",
+    "status": {
+        "ACCEPTED": "Прийнято",
+        "REJECTED": "Відхилено",
+        "CONSIDERED": "Розглядається",
+        "SENT": "Надіслано",
+        "TEST_TASK": "Тестове завдання",
+        "INTERVIEW": "Інтерв'ю",
+        "ALL": "Усі"
+    }
+}

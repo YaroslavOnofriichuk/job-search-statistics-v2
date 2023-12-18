@@ -45,6 +45,18 @@ export const router = createBrowserRouter([
                         },
                     },
                     {
+                        path: "notes/edit/:id",
+                        async lazy() {
+                            const { editNoteLoader, EditNotePage } = await import(
+                              "../pages/EditNotePage"
+                            );
+                            return {
+                              loader: editNoteLoader,
+                              Component: EditNotePage,
+                            };
+                        },
+                    },
+                    {
                         path: "calendar",
                         lazy: () => import("../pages/CalendarPage"),
                     },

@@ -1,0 +1,24 @@
+{
+    "goBack": "Go back",
+    "fields": {
+        "position": "Position",
+        "company": "Company",
+        "link": "Link",
+        "source": "Source",
+        "createdAt": "Sended at",
+        "description": "Description",
+        "tags": "Tags",
+        "status": "Status"
+    },
+    "save": "Save",
+    "delete": "Delete",
+    "status": {
+        "ACCEPTED": "Accepted",
+        "REJECTED": "Rejected",
+        "CONSIDERED": "Considered",
+        "SENT": "Sent",
+        "TEST_TASK": "Test task",
+        "INTERVIEW": "Interview",
+        "ALL": "All"
+    }
+}

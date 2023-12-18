@@ -38,7 +38,7 @@ export const notesLoader = async () => {
 		query: GET_NOTES,
 		variables: {
 			page: 1,
-            limit: 2,
+            limit: 10,
 			sort: "DESC",
 		},
 	});

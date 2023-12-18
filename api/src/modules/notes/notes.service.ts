@@ -87,6 +87,7 @@ export class NotesService {
   async findOne(id: number, userId: number) {
     return await this.notesRepository.findOne({
       where: { id, userId },
+      relations: { source: true, tags: { tag: true }},
     });
   }
 

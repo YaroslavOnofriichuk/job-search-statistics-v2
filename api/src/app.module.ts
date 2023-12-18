@@ -11,6 +11,7 @@ import { NotesModule } from './modules/notes/notes.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { SourcesModule } from './modules/sources/sources.module';
 import { TagsModule } from './modules/tags/tags.module';
+import { StatusesHistoryModule } from './modules/statuses-history/statuses-history.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { TagsModule } from './modules/tags/tags.module';
     AuthModule,
     SourcesModule,
     TagsModule,
+    StatusesHistoryModule,
   ],
   providers: [
     {

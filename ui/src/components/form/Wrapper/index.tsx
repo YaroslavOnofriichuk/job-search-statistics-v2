@@ -3,6 +3,7 @@ import styled from "styled-components";
 interface WrapperProps {
     size?: "small" | "big",
     $error?: boolean,
+    $disabled?: boolean,
 }
 
 export const Wrapper = styled.div<WrapperProps>`
@@ -18,6 +19,7 @@ export const Wrapper = styled.div<WrapperProps>`
     align-items: center;
     padding: ${({ size }) => (size === "big" ? "12px" : "7px 12px")};
     transition: .5s;
+    pointer-events: ${({ $disabled }) => ($disabled ? "none" : "auto")};
 
     & button {
         display: flex;

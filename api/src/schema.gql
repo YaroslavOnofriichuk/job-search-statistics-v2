@@ -87,11 +87,23 @@ type AuthResponse {
   refreshToken: String!
 }
 
+type NoteStatusHistory {
+  id: ID!
+  userId: Float!
+  user: User!
+  noteId: Float!
+  note: Note!
+  status: String!
+  description: String
+  createdAt: DateTime!
+}
+
 type Query {
   notes(getNotesArgs: GetNotesArgs!): NotesPaginationResponse!
   note(id: Int!): Note!
   sources: [NoteSource!]!
   tags: [Tag!]!
+  statusesHistory(noteId: Int!): [NoteStatusHistory!]!
 }
 
 input GetNotesArgs {
@@ -170,7 +182,7 @@ input UpdateNoteInput {
 
   """Note tags"""
   tags: [String!]
-  id: ID!
+  id: Int!
 }
 
 input AuthInput {
