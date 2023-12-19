@@ -1,0 +1,11 @@
+{
+    "status": {
+        "ACCEPTED": "Accepted",
+        "REJECTED": "Rejected",
+        "CONSIDERED": "Considered",
+        "SENT": "Sent",
+        "TEST_TASK": "Test task",
+        "INTERVIEW": "Interview",
+        "ALL": "All"
+    }
+}

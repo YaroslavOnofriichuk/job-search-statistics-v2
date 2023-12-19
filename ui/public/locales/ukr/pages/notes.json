@@ -1,0 +1,11 @@
+{
+    "columns": {
+        "createdAt": "Надіслано",
+        "position": "Посада",
+        "company": "Компанія",
+        "source": "Джерело",
+        "description": "Опис",
+        "status": "Статус"
+    },
+    "add": "Створити запис"
+}
