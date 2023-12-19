@@ -27,7 +27,7 @@ export const Window = styled.div<ModalProps>`
     .modal-head {
         width: 100%;
         min-width: 300px;
-        height: 80px;
+        height: 80px;        
         display: flex;
         justify-content: center;
         align-items: center;
@@ -43,6 +43,11 @@ export const Window = styled.div<ModalProps>`
             position: absolute;
             top: 20px;
             left: 25px;
+        }
+
+        p {
+            text-wrap: wrap;
+            max-width: 220px;
         }
     }
 

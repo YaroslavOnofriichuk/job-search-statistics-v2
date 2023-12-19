@@ -118,3 +118,11 @@ export const UPDATE_NOTE = gql`
         }
     }
 `;
+
+export const DELETE_NOTE = gql`
+    mutation DeleteNote($id: Int!) {
+        removeNote(id: $id) {
+            id
+        }
+    }
+`;

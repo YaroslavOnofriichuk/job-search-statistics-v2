@@ -17,7 +17,7 @@ export const Header = () => {
                 <ul>
                     {config.map((item) => (
                         <li key={item.path}>
-                            <Link path={item.path} icon={item.icon} />
+                            <Link path={item.path} icon={item.icon} title={item.title} />
                         </li>
                     ))}
                 </ul>

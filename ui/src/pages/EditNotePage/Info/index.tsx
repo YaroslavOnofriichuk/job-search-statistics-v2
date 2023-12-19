@@ -13,6 +13,8 @@ import { formatDate } from "../../../helpers";
 import type { NoteTag } from "../../../types";
 import { Button } from "../../../components/Button";
 import { LoadingIcon } from "../../../components/icons";
+import { Modal } from "../../../components/Modal";
+import { useState } from "react";
 
 export type FormData = {
     description?: string;
@@ -22,6 +24,7 @@ export type FormData = {
 
 interface InfoProps {
     onSubmit: (data: FormData) => void;
+    onDelete: (noteId: number) => void;
 }
 
 export const Info = (props: InfoProps) => {
@@ -34,6 +37,7 @@ export const Info = (props: InfoProps) => {
         variables: { id: Number(id) },
     });
     const { t } = useTranslation("pages/edit-note");
+    const [open, setOpen] = useState(false);
 
     const schema = yup
         .object({
@@ -158,11 +162,36 @@ export const Info = (props: InfoProps) => {
                         type="button"
                         size="big"
                         label={t("delete")}
-                    >
-                        {isSubmitting && <LoadingIcon />}
-                    </Button>
+                        onClick={() => setOpen(true)}
+                        color="secondary"
+                    />
                 </div>
             </form>
+
+            <Modal
+                open={open}
+                title={t("confirm-delete")}
+                onClose={() => setOpen(false)}
+            >
+                <div className="info-modal">
+                    <Button
+                        type="button"
+                        size="big"
+                        label={t("yes")}
+                        onClick={() => {
+                            setOpen(false);
+                            props.onDelete(Number(id));
+                        }}
+                    />
+                    <Button
+                        type="button"
+                        size="big"
+                        label={t("no")}
+                        onClick={() => setOpen(false)}
+                        color="secondary"
+                    />
+                </div>
+            </Modal>
         </InfoStyled>
     );
 };

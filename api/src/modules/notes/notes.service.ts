@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateNoteInput } from './dto/create-note.input';
@@ -85,18 +85,28 @@ export class NotesService {
   }
 
   async findOne(id: number, userId: number) {
-    return await this.notesRepository.findOne({
-      where: { id, userId },
+    const note = await this.notesRepository.findOne({
+      where: { id },
       relations: { source: true, tags: { tag: true }},
     });
+    if (!note) {
+      throw new NotFoundException("Note with provided id does not exist");
+    };
+    if (note.userId !== userId) {
+      throw new ForbiddenException('You have no access to this resource');
+    };
+    return note;
   }
 
   async update(id: number, dto: UpdateNoteInput, userId: number) {
     const note = await this.notesRepository.findOne({
-      where: { id, userId },
+      where: { id },
     });
     if (!note) {
-      throw new BadRequestException("Note with provided id does not exist");
+      throw new NotFoundException("Note with provided id does not exist");
+    };
+    if (note.userId !== userId) {
+      throw new ForbiddenException('You have no access to this resource');
     };
 
     let source: NoteSource;
@@ -123,7 +133,17 @@ export class NotesService {
   }
 
   async remove(id: number, userId: number) {
-    return await this.notesRepository.delete({ id, userId });
+    const note = await this.notesRepository.findOne({
+      where: { id },
+    });
+    if (!note) {
+      throw new NotFoundException("Note with provided id does not exist");
+    };
+    if (note.userId !== userId) {
+      throw new ForbiddenException('You have no access to this resource');
+    };
+    await this.notesRepository.delete({ id, userId });
+    return note;
   }
 
   async saveSource(userId: number, name: string): Promise<NoteSource> {

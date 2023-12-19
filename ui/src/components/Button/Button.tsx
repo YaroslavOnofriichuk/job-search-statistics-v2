@@ -3,6 +3,7 @@ import styled from "styled-components";
 interface ButtonProps {
     size?: "small" | "big",
     type?: "button" | "submit" | "reset",
+    color?: "primary" | "secondary",
 }
 
 export const Button = styled.button<ButtonProps>`
@@ -10,7 +11,7 @@ export const Button = styled.button<ButtonProps>`
     max-width: ${({ size }) => (size === "big" ? "350px" : "85px")};
     height: ${({ size }) => (size === "big" ? "60px" : "35px")};
     padding: ${({ size }) => (size === "big" ? "12px" : "7px 12px")};
-    background-color: ${({ theme }) => theme.colors.text.accent};
+    background-color: ${({ theme, color }) => (color === "primary" ? theme.colors.text.accent : theme.colors.text.error)};
     border: 2px solid ${({ theme }) => theme.colors.body.primary};
     border-radius: ${({ size }) => (size === "big" ? "25px" : "14px")};
     cursor: pointer;
@@ -60,6 +61,6 @@ export const Button = styled.button<ButtonProps>`
     &:disabled {
         cursor: none;
         pointer-events: none;
-        backdrop-filter: blur(10px);
+        background-color: rgba(255, 255, 255, 0.2);
     }
 `;

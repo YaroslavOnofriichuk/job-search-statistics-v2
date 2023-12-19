@@ -4,7 +4,6 @@ export const Info = styled.div`
     width: 100%;
     height: 100%;
     border-radius: 37px;
-    margin-top: 20px;
 
     display: flex;
     flex-direction: column;
@@ -23,22 +22,14 @@ export const Info = styled.div`
 
     & > form > div > button {
         margin: 0 20px;
+    }
 
-        &:last-of-type {
-            background-color: ${({ theme }) => theme.colors.text.error};
-
-            &:hover, &:focus {
-                background-color: ${({ theme }) => theme.colors.body.secondary};
-
-                & svg {
-                    fill: ${({ theme }) => theme.colors.text.secondary};
-                }
-
-                & p {
-                    color: ${({ theme }) => theme.colors.text.secondary};
-                }
-            }
-        }
+    .info-modal {
+        width: 300px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 10px;
     }
 
     @media (min-width: 767px) {
