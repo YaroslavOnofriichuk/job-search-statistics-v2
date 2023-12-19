@@ -1,9 +1,5 @@
 import {
-    StatisticIcon,
     ListIcon,
-    CalendarIcon,
-    UserIcon,
-    HomeIcon,
 } from "../../components/icons";
 
 export const config = [
