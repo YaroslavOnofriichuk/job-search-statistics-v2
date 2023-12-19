@@ -31,8 +31,7 @@ export const List = () => {
             type: "SET_LIMIT", 
             payload: data.notes.limit + initialState.limit,
         });
-        //@ts-ignore
-        ref.current.scrollIntoView({ behavior: "smooth", block: "end" });
+        ref.current && ref.current.scrollIntoView({ behavior: "smooth", block: "end" });
     };
 
     if (loading) {
@@ -50,7 +49,7 @@ export const List = () => {
             {data.notes.notes.map((note: Note) => (
                 <li key={note.id}>
                     <Link 
-                        to={"/notes/" + note.id}
+                        to={"/notes/edit/" + note.id}
                         preventScrollReset={true}
                     >
                         <p>{t("columns.createdAt")}</p>

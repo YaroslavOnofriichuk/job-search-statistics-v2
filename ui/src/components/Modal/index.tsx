@@ -11,11 +11,9 @@ interface ModalProps {
 }
 
 export const Modal = (props: ModalProps) => {
-    const ref = useOutsideClick(props.onClose);
-
+    const ref = useOutsideClick<HTMLDivElement>(props.onClose);
     
     return <Window open={props.open}>
-        {/* @ts-ignore */}
         <div className="modal-main" ref={ref} >
             <div className="modal-head">
                 <CloseButton onClick={props.onClose} />

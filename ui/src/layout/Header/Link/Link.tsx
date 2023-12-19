@@ -11,17 +11,22 @@ export const Link = styled(NavLink)`
 
     width: 100%;
     height: 50px;
-    padding-left: 17px;
+    padding-left: 13px;
     border-radius: 20px;
     background-color: transparent;
 
     div {
         color: ${({ theme }) => theme.colors.text.primary};
         transition: .5s;
-        width: 24px;
-        height: 24px;
+        width: 34px;
+        height: 34px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
         svg {
+            width: 34px;
+            height: 34px;
             transition: .5s;
             fill: ${({ theme }) => theme.colors.text.primary};
         }

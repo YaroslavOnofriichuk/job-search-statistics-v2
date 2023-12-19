@@ -6,12 +6,24 @@ export const GlobalStyle = createGlobalStyle`
   }
   html {
     scroll-behavior: smooth;
+    ::-webkit-scrollbar {
+      width: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 5px ${({ theme }) => theme.colors.body.primary};
+      border-radius: 5px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: ${({ theme }) => theme.colors.text.accent};
+      border-radius: 5px;
+    }
   }
   body {
     margin: 0;
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
 
     background: ${({ theme }) => theme.colors.body.secondary};  
 

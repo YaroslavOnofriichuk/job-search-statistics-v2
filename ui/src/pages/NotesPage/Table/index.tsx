@@ -48,7 +48,7 @@ export const Table = () => {
 
             <tbody>
                 {data.notes.notes.map((note: Note) => (
-                    <tr key={note.id} onClick={() => navigate("/notes/" + note.id)}>
+                    <tr key={note.id} onClick={() => navigate("/notes/edit/" + note.id)}>
                         <td>{note.createdAt ? formatDate(note.createdAt, "dd MMM yyyy HH:mm") : ""}</td>
                         <td>{note.position}</td>
                         <td>{note.company}</td>

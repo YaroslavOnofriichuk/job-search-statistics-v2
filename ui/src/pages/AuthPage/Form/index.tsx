@@ -2,8 +2,7 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from "react-i18next";
 import * as yup from "yup";
-import { Form as FormStyled } from "./Form";
-import { Input } from "../../../components/form";
+import { Input, Form as FormStyled } from "../../../components/form";
 import { Button } from "../../../components/Button";
 import { LoadingIcon } from "../../../components/icons";
 

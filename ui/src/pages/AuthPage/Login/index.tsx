@@ -3,12 +3,13 @@ import type { FormData } from "../Form";
 import { LOGIN } from "../../../graphql";
 import { useEffect } from "react";
 import { useMutation } from "@apollo/client";
-import { useAuthStore } from "../../../hooks";
+import { useAuthStore, useToast } from "../../../hooks";
 
 export const Login = () => {
-    const [login, { data }] = useMutation(LOGIN);
+    const [login, { data, error }] = useMutation(LOGIN);
     const { setIsLoggedIn } = useAuthStore();
-    
+    const { addToast } = useToast();
+
     const onSubmit = (data: FormData) => {
         login({ variables: { email: data.email, password: data.password } });
     };
@@ -19,7 +20,18 @@ export const Login = () => {
             localStorage.setItem("refreshToken", data.login.refreshToken);
             setIsLoggedIn(true);
         }
-    }, [data, setIsLoggedIn])
+    }, [data, setIsLoggedIn]);
 
-    return <Form onSubmit={onSubmit} />
+    useEffect(() => {
+        if (error?.message) {
+            addToast({
+                status: "error",
+                text: Array.isArray(error.message)
+                    ? error.message.join(", ")
+                    : error.message,
+            });
+        }
+    }, [addToast, error]);
+
+    return <Form onSubmit={onSubmit} />;
 };

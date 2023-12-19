@@ -36,6 +36,10 @@ export class NoteStatusHistory {
   @Column({ type: 'enum', enum: NoteStatus, default: NoteStatus.SENT })
   status: NoteStatus;
 
+  @Field({ nullable: true })
+  @Column({ type: 'text', nullable: true })
+  description: string;
+
   @Field()
   @CreateDateColumn()
   createdAt: Date;

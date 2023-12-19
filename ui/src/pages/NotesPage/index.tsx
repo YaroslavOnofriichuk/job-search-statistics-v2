@@ -8,12 +8,17 @@ import { Layout } from "../../layout";
 import { Loader } from "../../components/Loader";
 import { List } from "./List";
 import { Table } from "./Table";
+import { ButtonLink } from "../../components/LinkButton";
+import { useTranslation } from "react-i18next";
 
 export function NotesPage() {
 	const { notes } = useLoaderData() as NotesPaginationResponse;
 	const { isMobile } = useMatchMedia();
+	const { t } = useTranslation("pages/notes");
 	
     return (<Layout>
+		<ButtonLink to="add" label={t("add")} />
+
 		<Suspense fallback={<Loader />}>
 			<Await
 				resolve={notes}
@@ -33,7 +38,7 @@ export const notesLoader = async () => {
 		query: GET_NOTES,
 		variables: {
 			page: 1,
-            limit: 2,
+            limit: 10,
 			sort: "DESC",
 		},
 	});

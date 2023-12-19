@@ -14,7 +14,7 @@ export const Window = styled.div<ModalProps>`
     opacity: ${props => (props.open ? 1 : 0)};
     visibility: ${props => (props.open ? "visible" : "hidden")};
     pointer-events: ${props => (props.open ? "auto" : "none")};;
-    transition: opasity 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
         visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
     .modal-main {
@@ -27,7 +27,7 @@ export const Window = styled.div<ModalProps>`
     .modal-head {
         width: 100%;
         min-width: 300px;
-        height: 80px;
+        height: 80px;        
         display: flex;
         justify-content: center;
         align-items: center;
@@ -43,6 +43,11 @@ export const Window = styled.div<ModalProps>`
             position: absolute;
             top: 20px;
             left: 25px;
+        }
+
+        p {
+            text-wrap: wrap;
+            max-width: 220px;
         }
     }
 

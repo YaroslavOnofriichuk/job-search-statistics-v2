@@ -18,15 +18,17 @@ export class NoteSubscriber implements EntitySubscriberInterface<Note> {
       userId: event.entity.userId,
       noteId: event.entity.id,
       status: event.entity.status,
+      description: event.entity.description || null,
     });
   }
 
   afterUpdate(event: UpdateEvent<Note>) {
-    if (event.entity.status && event.entity.status !== event.databaseEntity.status) {
+    if (event.entity.status && (event.entity.status !== event.databaseEntity.status)) {
       event.manager.getRepository(NoteStatusHistory).save({
         userId: event.entity.userId,
         noteId: event.entity.id,
         status: event.entity.status,
+        description: event.entity.description || null,
       });
     }
   }

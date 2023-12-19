@@ -1,0 +1,36 @@
+{
+    "goBack": "Go back",
+    "title": "Create new note",
+    "other": "Other",
+    "fields": {
+        "position": "Position",
+        "company": "Company",
+        "link": "Link",
+        "source": "Source",
+        "createdAt": "Sended at",
+        "description": "Description"
+    },
+    "continue": "Continue",
+    "errors": {
+        "length": {
+            "position": "Position must be at most 128 characters",
+            "company": "Company must be at most 128 characters",
+            "link": "Link must be at most 256 characters",
+            "source": "Source must be at most 128 characters"
+        },
+        "required": {
+            "position": "Position is required",
+            "company": "Company is required",
+            "link": "Link is required",
+            "source": "Source is required",
+            "status": "Status is required",
+            "createdAt": "Sended at is required"
+        },
+        "valid": {
+            "link": "Link should be valid internet address"
+        },
+        "not": {
+            "source": "Source should not be other"
+        }
+    }
+}

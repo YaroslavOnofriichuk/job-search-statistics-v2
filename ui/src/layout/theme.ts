@@ -1,4 +1,5 @@
 const lightTheme = {
+    mode: "light",
     colors: {
         body: {
             primary: "#FFFFFF",
@@ -9,11 +10,13 @@ const lightTheme = {
             secondary: "#161D26",
             accent: "#12BE73",
             error: "#EF5350",
+            success: "#12BE73",
         }
     },
 };
 
 const darkTheme = {
+    mode: "dark",
     colors: {
         body: {
             primary: "#12181F",
@@ -24,6 +27,7 @@ const darkTheme = {
             secondary: "#808195",
             accent: "#12BE73",
             error: "#EF5350",
+            success: "#12BE73",
         }
     },
 };

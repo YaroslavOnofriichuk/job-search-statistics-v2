@@ -20,4 +20,5 @@ export { LogOutIcon } from "./LogOutIcon";
 export interface IconProps {
     size?: string;
     color?: string;
+    sx?: any;
 }

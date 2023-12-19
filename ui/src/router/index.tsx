@@ -30,7 +30,31 @@ export const router = createBrowserRouter([
                               loader: notesLoader,
                               Component: NotesPage,
                             };
-                          },
+                        },
+                    },
+                    {
+                        path: "notes/add",
+                        async lazy() {
+                            const { addNoteLoader, AddNotePage } = await import(
+                              "../pages/AddNotePage"
+                            );
+                            return {
+                              loader: addNoteLoader,
+                              Component: AddNotePage,
+                            };
+                        },
+                    },
+                    {
+                        path: "notes/edit/:id",
+                        async lazy() {
+                            const { editNoteLoader, EditNotePage } = await import(
+                              "../pages/EditNotePage"
+                            );
+                            return {
+                              loader: editNoteLoader,
+                              Component: EditNotePage,
+                            };
+                        },
                     },
                     {
                         path: "calendar",

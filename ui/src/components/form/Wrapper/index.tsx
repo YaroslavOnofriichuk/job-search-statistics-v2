@@ -3,6 +3,7 @@ import styled from "styled-components";
 interface WrapperProps {
     size?: "small" | "big",
     $error?: boolean,
+    $disabled?: boolean,
 }
 
 export const Wrapper = styled.div<WrapperProps>`
@@ -14,11 +15,11 @@ export const Wrapper = styled.div<WrapperProps>`
     background: ${({ theme }) => theme.colors.body.primary};
     color: ${({ theme, $error }) => $error ? theme.colors.text.error : theme.colors.text.primary};
     position: relative;
-    z-index: 1;
     display: flex;
     align-items: center;
     padding: ${({ size }) => (size === "big" ? "12px" : "7px 12px")};
     transition: .5s;
+    pointer-events: ${({ $disabled }) => ($disabled ? "none" : "auto")};
 
     & button {
         display: flex;
@@ -30,6 +31,8 @@ export const Wrapper = styled.div<WrapperProps>`
         background: transparent;
         margin-right: 20px;
         position: relative;
+        width: 36px;
+        height: 26px;
 
         & div {
             display: flex;
@@ -47,10 +50,10 @@ export const Wrapper = styled.div<WrapperProps>`
             pointer-events: none;
         }
 
-        &::after { 
+        &:not([disabled])::after { 
             content: "";
             position: absolute;
-            top: 5px;
+            top: 7px;
             right: -10px;
             display: block;
             width: 2px;
@@ -72,11 +75,14 @@ export const Wrapper = styled.div<WrapperProps>`
             color: ${({ theme, $error }) => $error ? theme.colors.text.error : theme.colors.text.secondary};
         }
 
-        &:-internal-autofill-selected {
-            background-image: none !important;
-            background-color: transparent !important;
-            color: ${({ theme, $error }) => $error ? theme.colors.text.error : theme.colors.text.primary} !important;
+        &:-webkit-autofill,
+        &:-webkit-autofill:hover, 
+        &:-webkit-autofill:focus, 
+        &:-webkit-autofill:active{
+            -webkit-box-shadow: 0 0 0 30px ${({ theme }) => theme.colors.body.primary} inset !important;
+            -webkit-text-fill-color: ${({ theme }) => theme.colors.text.primary} !important;
         }
+
     }
 
     & p {
@@ -105,6 +111,14 @@ export const Wrapper = styled.div<WrapperProps>`
 
         & input {
             color: ${({ theme }) => theme.colors.text.secondary};
+
+            &:-webkit-autofill,
+            &:-webkit-autofill:hover, 
+            &:-webkit-autofill:focus, 
+            &:-webkit-autofill:active{
+                -webkit-box-shadow: 0 0 0 30px ${({ theme }) => theme.colors.body.secondary} inset !important;
+                -webkit-text-fill-color: ${({ theme }) => theme.colors.text.primary} !important;
+            }
         }
     }
 `;

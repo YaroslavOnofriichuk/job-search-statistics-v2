@@ -8,13 +8,11 @@ import { ArrowRightIcon, LogOutIcon } from "../../../components/icons";
 import { ThemeSwitch } from "../../../components/ThemeSwitch";
 import type { Language } from "../../../types";
 import { useAuthStore } from "../../../hooks";
-import { useNavigate } from "react-router-dom";
 
 export const Settings = () => {
     const [open, setOpen] = useState(false);
     const { t, i18n } = useTranslation("components/settings");
     const { isLoggedIn, setIsLoggedIn } = useAuthStore();
-    const navigate = useNavigate();
 
     const handleChangeLanguage = () => {
         const newLang: Language = i18n.language === "ukr" ? "eng" : "ukr";
@@ -26,7 +24,6 @@ export const Settings = () => {
 
     const handleChangeAuth = () => {
         setIsLoggedIn(false)
-        //navigate("/auth/signin");
     };
 
     return (

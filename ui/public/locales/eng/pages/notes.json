@@ -6,5 +6,6 @@
         "source": "Source",
         "description": "Description",
         "status": "Status"
-    }
+    },
+    "add": "Add note"
 }
