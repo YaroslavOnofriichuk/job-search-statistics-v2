@@ -25,6 +25,7 @@
     "orm:revert": "npm run typeorm -- -d ./src/config/database.ts migration:revert"
   },
   "dependencies": {
+    "@nestjs/cli": "^10.0.0",
     "@apollo/server": "^4.9.5",
     "@nestjs/apollo": "^12.0.9",
     "@nestjs/common": "^10.0.0",
@@ -47,7 +48,6 @@
     "typeorm": "^0.3.17"
   },
   "devDependencies": {
-    "@nestjs/cli": "^10.0.0",
     "@nestjs/schematics": "^10.0.0",
     "@nestjs/testing": "^10.0.0",
     "@types/bcrypt": "^5.0.2",
