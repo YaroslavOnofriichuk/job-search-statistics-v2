@@ -29,15 +29,15 @@ export enum NoteStatus {
 }
 
 export type Note = {
-    id?: number,
+    id: number,
     userId?: number,
     sourceId?: number,
     source?: NoteSource,
-    position?: string,
+    position: string,
     company?: string,
     description?: string,
-    status?: NoteStatus,
-    createdAt?: Date,
+    status: NoteStatus,
+    createdAt: Date,
     updatedAt?: Date,
     tags?: NoteTag[],
 }

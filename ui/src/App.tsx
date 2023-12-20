@@ -9,7 +9,7 @@ function App() {
 
     useEffect(() => {
         if (pathname === "/") {
-            navigate("/notes");
+            navigate("notes");
         }
     }, [navigate, pathname]);
 

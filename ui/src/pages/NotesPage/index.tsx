@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { defer, Await, useLoaderData } from "react-router-dom";
+import { Await, useLoaderData } from "react-router-dom";
 import { ApolloQueryResult } from "@apollo/client";
 import type { NotesPaginationResponse } from "../../types";
 import { client, GET_NOTES } from "../../graphql";
@@ -43,7 +43,5 @@ export const notesLoader = async () => {
 		},
 	});
 
-	return defer({
-		notes: res.data.notes,
-	})
+	return { notes: res.data.notes };
 };
