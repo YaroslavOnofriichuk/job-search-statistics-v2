@@ -27,7 +27,7 @@ export const AuthPage = () => {
                     <Outlet />
                 </div>
 
-                <div className="auth-right-side">фів</div>
+                <div className="auth-right-side"></div>
             </Wrapper>
         </Layout>
     );

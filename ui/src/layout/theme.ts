@@ -3,7 +3,7 @@ const lightTheme = {
     colors: {
         body: {
             primary: "#FFFFFF",
-            secondary: "#808195",
+            secondary: "#C3CDDB",
         },
         text: {
             primary: "#12181F",
@@ -24,7 +24,7 @@ const darkTheme = {
         },
         text: {
             primary: "#FFFFFF",
-            secondary: "#808195",
+            secondary: "#C3CDDB",
             accent: "#12BE73",
             error: "#EF5350",
             success: "#12BE73",

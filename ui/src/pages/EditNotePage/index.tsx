@@ -5,6 +5,7 @@ import {
     UPDATE_NOTE,
     GET_NOTES,
     DELETE_NOTE,
+    GET_CALENDAR_NOTES,
 } from "../../graphql";
 import { Layout } from "../../layout";
 import { useTranslation } from "react-i18next";
@@ -28,10 +29,10 @@ export function EditNotePage() {
     const { t } = useTranslation("pages/edit-note");
     const { note } = useLoaderData() as LoaderData;
     const [updateNote, { data, error }] = useMutation(UPDATE_NOTE, {
-        refetchQueries: [GET_NOTES, GET_STATUSES_HISTORY],
+        refetchQueries: [GET_NOTES, GET_STATUSES_HISTORY, GET_CALENDAR_NOTES],
     });
     const [removeNote, { data: deleteData, error: deleteError }] = useMutation(DELETE_NOTE, {
-        refetchQueries: [GET_NOTES],
+        refetchQueries: [GET_NOTES, GET_CALENDAR_NOTES],
     });
     const { addToast } = useToast();
     const navigate = useNavigate();
