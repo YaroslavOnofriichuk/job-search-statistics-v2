@@ -126,3 +126,31 @@ export const DELETE_NOTE = gql`
         }
     }
 `;
+
+export const GET_CALENDAR_NOTES = gql`
+    query GetCalendarNotes(
+        $page: Int
+        $limit: Int
+        $sort: String
+        $status: String
+        $search: String
+    ) {
+        notes(
+            getNotesArgs: {
+                page: $page
+                limit: $limit
+                sort: $sort
+                status: $status
+                search: $search
+            }
+        ) {
+            notes {
+                id
+                createdAt
+                position
+                status
+            }
+            totalItems
+        }
+    }
+`;

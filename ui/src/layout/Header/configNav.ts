@@ -1,5 +1,6 @@
 import {
     ListIcon,
+    CalendarIcon,
 } from "../../components/icons";
 
 export const config = [
@@ -18,11 +19,11 @@ export const config = [
     //     icon: StatisticIcon,
     //     title: "home",
     // },
-    // {
-    //     path: "/calendar",
-    //     icon: CalendarIcon,
-    //     title: "home",
-    // },
+    {
+        path: "/calendar",
+        icon: CalendarIcon,
+        title: "calendar",
+    },
     // {
     //     path: "/user",
     //     icon: UserIcon,

@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { Wrapper } from "./Wrapper";
 import { ButtonLink } from "../../components/LinkButton";
 import { Form, FormData } from "./Form";
-import { CREATE_NOTE, GET_NOTES } from "../../graphql";
+import { CREATE_NOTE, GET_NOTES, GET_CALENDAR_NOTES } from "../../graphql";
 import { useEffect } from "react";
 import { useMutation } from "@apollo/client";
 import { useToast } from "../../hooks";
@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 export function AddNotePage() {
 	const { t } = useTranslation("pages/add-note");
 	const [createNote, { data, error }] = useMutation(CREATE_NOTE, {
-		refetchQueries: [ GET_NOTES ],
+		refetchQueries: [ GET_NOTES, GET_CALENDAR_NOTES ],
 	});
 	const { addToast } = useToast();
 	const navigate = useNavigate();
