@@ -1,32 +1,23 @@
 import {
     ListIcon,
     CalendarIcon,
+    StatisticIcon,
 } from "../../components/icons";
 
 export const config = [
-    // {
-    //     path: "/home",
-    //     icon: HomeIcon,
-    //     title: "home",
-    // },
     {
         path: "/notes",
         icon: ListIcon,
         title: "notes",
     },
-    // {
-    //     path: "/statistic",
-    //     icon: StatisticIcon,
-    //     title: "home",
-    // },
+    {
+        path: "/statistic/source",
+        icon: StatisticIcon,
+        title: "statistic",
+    },
     {
         path: "/calendar",
         icon: CalendarIcon,
         title: "calendar",
     },
-    // {
-    //     path: "/user",
-    //     icon: UserIcon,
-    //     title: "home",
-    // },
 ];

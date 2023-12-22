@@ -154,3 +154,17 @@ export const GET_CALENDAR_NOTES = gql`
         }
     }
 `;
+
+export const GET_STATUS_STATISTIC = gql`
+    query GetStatusStatistic {
+        statusStatistic {
+            ALL
+            ACCEPTED
+            REJECTED
+            CONSIDERED
+            SENT
+            TEST_TASK
+            INTERVIEW
+        }
+    }
+`;
