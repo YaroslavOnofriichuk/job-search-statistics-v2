@@ -21,6 +21,7 @@ export function AddNotePage() {
     const [createNote, { data, error }] = useMutation(CREATE_NOTE, {
         refetchQueries: [
             GET_NOTES,
+            GET_TAGS,
             GET_CALENDAR_NOTES,
             GET_SOURCES_STATISTIC,
             GET_STATUS_STATISTIC,

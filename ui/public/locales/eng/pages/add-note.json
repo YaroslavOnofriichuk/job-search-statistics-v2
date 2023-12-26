@@ -8,7 +8,8 @@
         "link": "Link",
         "source": "Source",
         "createdAt": "Sended at",
-        "description": "Description"
+        "description": "Description",
+        "tags": "Tags"
     },
     "continue": "Continue",
     "errors": {
