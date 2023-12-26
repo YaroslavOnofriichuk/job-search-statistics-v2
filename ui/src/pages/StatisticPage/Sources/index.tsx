@@ -7,8 +7,8 @@ import { getStatusColor } from "../../../helpers";
 import { useTranslation } from "react-i18next";
 import ReactEcharts from "echarts-for-react";
 import { useTheme } from "styled-components";
-import  * as echarts from 'echarts/core';
-import { dark, light, formatter } from "../chartHelpers";
+import * as echarts from "echarts/core";
+import { dark, light, sourcesFormatter } from "../chartHelpers";
 
 type NoteSourceStatisticResponse = {
     id: number;
@@ -39,22 +39,23 @@ export function SourcesPage() {
         tooltip: {
             trigger: "axis",
             axisPointer: {
-              type: "shadow"
+                type: "shadow",
             },
             className: "chart-tooltip",
-            formatter: formatter,
+            formatter: sourcesFormatter,
         },
         xAxis: {
             type: "category",
-            data: data.map(source => source.name),
+            data: data.map((source) => source.name),
             axisTick: {
                 alignWithLabel: true,
             },
         },
         yAxis: {
             type: "value",
+            interval: 1,
         },
-        series: Object.values(NoteStatus).map(status => ({
+        series: Object.values(NoteStatus).map((status) => ({
             type: "bar",
             color: getStatusColor(status),
             data: data.map(source => source[status]),

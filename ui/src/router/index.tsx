@@ -17,10 +17,6 @@ export const router = createBrowserRouter([
                 element: <PrivateRoute />,
                 children: [
                     {
-                        path: "home",
-                        lazy: () => import("../pages/HomePage"),
-                    },
-                    {
                         path: "notes",
                         async lazy() {
                             const { notesLoader, NotesPage } = await import(
@@ -93,6 +89,18 @@ export const router = createBrowserRouter([
                                     return {
                                       loader: feedbackLoader,
                                       Component: FeedbackPage,
+                                    };
+                                },
+                            },
+                            {
+                                path: "dynamics",
+                                async lazy() {
+                                    const { dynamicsLoader, DynamicsPage } = await import(
+                                      "../pages/StatisticPage/Dynamics"
+                                    );
+                                    return {
+                                      loader: dynamicsLoader,
+                                      Component: DynamicsPage,
                                     };
                                 },
                             }

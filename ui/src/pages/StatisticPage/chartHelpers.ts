@@ -60,7 +60,7 @@ export const light = {
     },
 };
 
-export function formatter(params: any) {
+export function sourcesFormatter(params: any) {
     return `<div class="chart-tooltip-item">
         <p>${params[0].axisValueLabel}: ${params.reduce((acc: number, param: any) => (
             acc + param.value
@@ -68,5 +68,12 @@ export function formatter(params: any) {
         ${params.map((param: any) => (
             `<p>${param.seriesName}: ${param.value}</p>`
         )).join("")}
+    </div>`;
+}
+
+export function dynamicsFormatter(params: any) {
+    return `<div class="chart-tooltip-item">
+        <p>${params.seriesName}</p>
+        <p>${params.data.name}: ${params.data.value}</p>
     </div>`;
 }

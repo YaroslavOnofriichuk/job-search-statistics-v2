@@ -1,6 +1,6 @@
 import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Brackets, Repository } from 'typeorm';
 import { CreateNoteInput } from './dto/create-note.input';
 import { UpdateNoteInput } from './dto/update-note.input';
 import { GetNotesArgs } from './dto/get-notes.args';
@@ -48,7 +48,15 @@ export class NotesService {
       .where("note.userId = :userId", { userId })
 
     if (args.search?.trim()) {
-      qb.andWhere(`LOWER(note.position) ~* LOWER(:value)`, { value: args.search })
+      qb.andWhere(
+        new Brackets((qb) => {
+            qb.where(`LOWER(note.position) ~* LOWER(:value)`, {
+              value: args.search.trim(),
+            })
+            .orWhere(`LOWER(note.company) ~* LOWER(:value)`, { value: args.search.trim() })
+            .orWhere(`LOWER(note.description) ~* LOWER(:value)`, { value: args.search.trim() })
+        }),
+      )
     }
 
     if (args.status) {

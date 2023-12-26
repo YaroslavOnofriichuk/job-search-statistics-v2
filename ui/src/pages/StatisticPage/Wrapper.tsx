@@ -28,7 +28,7 @@ export const Wrapper = styled.div`
     .chart-tooltip {
         width: 100%;
         height: 100%;
-        max-width: 200px;
+        max-width: 170px;
         max-height: 200px;
     }
 
