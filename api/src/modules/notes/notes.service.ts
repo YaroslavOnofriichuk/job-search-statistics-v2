@@ -1,10 +1,10 @@
 import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Brackets, Repository } from 'typeorm';
 import { CreateNoteInput } from './dto/create-note.input';
 import { UpdateNoteInput } from './dto/update-note.input';
 import { GetNotesArgs } from './dto/get-notes.args';
-import { Note } from '../../entities/note/note.entity';
+import { Note, NoteStatus } from '../../entities/note/note.entity';
 import { NoteSource } from '../../entities/note/note-source.entity';
 import { NoteTag } from '../../entities/note/note-tag.entity';
 import { Tag } from '../../entities/tag/tag.entity';
@@ -48,7 +48,15 @@ export class NotesService {
       .where("note.userId = :userId", { userId })
 
     if (args.search?.trim()) {
-      qb.andWhere(`LOWER(note.position) ~* LOWER(:value)`, { value: args.search })
+      qb.andWhere(
+        new Brackets((qb) => {
+            qb.where(`LOWER(note.position) ~* LOWER(:value)`, {
+              value: args.search.trim(),
+            })
+            .orWhere(`LOWER(note.company) ~* LOWER(:value)`, { value: args.search.trim() })
+            .orWhere(`LOWER(note.description) ~* LOWER(:value)`, { value: args.search.trim() })
+        }),
+      )
     }
 
     if (args.status) {
@@ -182,5 +190,21 @@ export class NotesService {
         })
       }
     }
+  }
+
+  async getStatistic(userId: number) {
+    const qb = this.notesRepository
+      .createQueryBuilder('note')
+      .select('COUNT(*)', 'ALL')
+
+    Object.values(NoteStatus).forEach(status => {
+      qb.addSelect(`COUNT(*) FILTER (WHERE note.status = '${status}')`, status);
+    });
+
+    const result = await qb
+      .where('note.userId = :userId', { userId })
+      .getRawOne()
+
+    return result
   }
 }

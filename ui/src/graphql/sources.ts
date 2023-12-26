@@ -8,3 +8,18 @@ export const GET_SOURCES = gql`
         }
     }
 `;
+
+export const GET_SOURCES_STATISTIC = gql`
+    query GetSourcesStatistic {
+        sourcesStatistic {
+            id
+            name
+            ACCEPTED
+            REJECTED
+            CONSIDERED
+            SENT
+            TEST_TASK
+            INTERVIEW
+        }
+    }
+`;

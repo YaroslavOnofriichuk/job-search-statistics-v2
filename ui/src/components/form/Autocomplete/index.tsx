@@ -1,8 +1,7 @@
-import { useState } from "react";
+import { ChangeEvent, useState, KeyboardEvent } from "react";
 import { Wrapper } from "../Wrapper";
-import { ArrowLeftIcon, ArrowRightIcon } from "../../icons";
-import { Options } from "./Options";
-import { useOutsideClick } from "../../../hooks";
+import { Options } from "../Options";
+import { Values } from "./Values";
 
 type Option = {
     label: string;
@@ -11,68 +10,121 @@ type Option = {
 
 type Event = {
     target: {
-        value: string,
-        name: string,
-    }
+        value: string[];
+        name: string;
+    };
 };
 
 interface AutocompleteProps {
     name: string;
     placeholder?: string;
-    value: string;
+    value: string[];
     onChange: (event: Event) => void;
     options: Option[];
-    size?: "small" | "big";
     error?: boolean;
     helperText?: string | null;
 }
 
 export const Autocomplete = (props: AutocompleteProps) => {
-    const [open, setOpen] = useState(false);
-    const ref = useOutsideClick<HTMLUListElement>(() => setOpen(false));
+    const [newValue, setNewValue] = useState("");
 
-    const handleClick = (value: string) => {
+    const handleAddValue = (value: string) => {
         props.onChange({
             target: {
                 name: props.name,
-                value,
+                value: [...props.value, value.trim()],
             },
         });
-        setOpen(false);
+        setNewValue("");
+    };
+
+    const handleDeleteValue = (value: string) => {
+        props.onChange({
+            target: {
+                name: props.name,
+                value: props.value.filter((val) => val.trim() !== value.trim()),
+            },
+        });
+        setNewValue("");
+    };
+
+    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+        setNewValue(event.target.value);
+    };
+
+    const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+        event.stopPropagation()
+        if (event.key === "Enter") {
+            props.onChange({
+                target: {
+                    name: props.name,
+                    value: [...props.value, event.currentTarget.value.trim()],
+                },
+            });
+        }
+    };
+
+    const getOptions = () => {
+        if (newValue.trim().length > 0) {
+            return props.options.filter((option) =>
+                option.value
+                    .toLowerCase()
+                    .includes(newValue.trim().toLowerCase())
+            );
+        }
+
+        return [];
     };
 
     return (
-        <Wrapper size={props.size} $error={props.error}>
-            <button type="button" onClick={() => setOpen(!open)}>
-                {open ? (
-                    <ArrowLeftIcon sx={{ transform: "rotate(90deg)" }} />
-                ) : (
-                    <ArrowRightIcon sx={{ transform: "rotate(90deg)" }} />
+        <>
+            {props.value.length > 0 && (
+                <Values>
+                    {props.value.map((val) => (
+                        <li key={val}>
+                            <button
+                                type="button"
+                                onClick={() => handleDeleteValue(val)}
+                            >
+                                #{val}
+                            </button>
+                        </li>
+                    ))}
+                </Values>
+            )}
+            <Wrapper size="big" $error={props.error}>
+                <button type="button" disabled></button>
+
+                <input
+                    type="text"
+                    placeholder={props.placeholder || ""}
+                    name={props.name}
+                    value={newValue}
+                    onChange={handleChange}
+                    onKeyDown={handleKeyDown}
+                    autoComplete="off"
+                />
+
+                {props.helperText && <p>{props.helperText}</p>}
+
+                {getOptions().length > 0 && (
+                    <Options size="big" $error={props.error}>
+                        {getOptions().map((option) => (
+                            <li
+                                key={option.value}
+                                className={
+                                    props.value.includes(option.value)
+                                        ? "selected"
+                                        : ""
+                                }
+                                onClick={() => handleAddValue(option.value)}
+                            >
+                                {option.label}
+                            </li>
+                        ))}
+                    </Options>
                 )}
-            </button>
-
-            <input
-                type="text"
-                placeholder={props.placeholder || ""}
-                name={props.name}
-                value={props.value}
-                onClick={() => setOpen(!open)}
-                readOnly
-            />
-
-            {props.helperText && <p>{props.helperText}</p>}
-
-            {open && <Options size={props.size} $error={props.error} ref={ref}>
-                {(props.options || []).map(option => (
-                    <li 
-                        key={option.value} 
-                        className={props.value === option.value ? "selected" : ""}
-                        onClick={() => handleClick(option.value)}
-                    >
-                        {option.label}
-                    </li>
-                ))}
-            </Options>}
-        </Wrapper>
+            </Wrapper>
+        </>
     );
 };

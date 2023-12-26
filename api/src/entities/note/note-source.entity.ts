@@ -1,6 +1,7 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany } from 'typeorm';
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 import { User } from '../user/user.entity';
+import { Note } from './note.entity';
 
 @ObjectType()
 @Entity()
@@ -20,4 +21,8 @@ export class NoteSource {
   @Field()
   @Column({ type: 'varchar', length: 128 })
   name: string;
+
+  @Field(() => [Note])
+  @OneToMany(() => Note, ({source}) => source)
+  notes: Note[];
 }

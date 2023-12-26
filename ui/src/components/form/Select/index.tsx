@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Wrapper } from "../Wrapper";
 import { ArrowLeftIcon, ArrowRightIcon } from "../../icons";
-import { Options } from "./Options";
+import { Options } from "../Options";
 import { useOutsideClick } from "../../../hooks";
 
 type Option = {
@@ -22,7 +22,6 @@ interface SelectProps {
     value: string;
     onChange: (event: Event) => void;
     options: Option[];
-    size?: "small" | "big";
     error?: boolean;
     helperText?: string | null;
 }
@@ -42,7 +41,7 @@ export const Select = (props: SelectProps) => {
     };
 
     return (
-        <Wrapper size={props.size} $error={props.error}>
+        <Wrapper size="big" $error={props.error}>
             <button type="button" onClick={() => setOpen(!open)}>
                 {open ? (
                     <ArrowLeftIcon sx={{ transform: "rotate(90deg)" }} />
@@ -62,7 +61,7 @@ export const Select = (props: SelectProps) => {
 
             {props.helperText && <p>{props.helperText}</p>}
 
-            {open && <Options size={props.size} $error={props.error} ref={ref}>
+            {open && <Options size="big" $error={props.error} ref={ref}>
                 {(props.options || []).map(option => (
                     <li 
                         key={option.value} 

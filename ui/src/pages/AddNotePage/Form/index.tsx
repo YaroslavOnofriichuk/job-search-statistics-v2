@@ -2,7 +2,7 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useTranslation } from "react-i18next";
 import * as yup from "yup";
-import { Input, Form as FormStyled, Select, DatePicker, TextArea } from "../../../components/form";
+import { Input, Form as FormStyled, Select, DatePicker, TextArea, Autocomplete } from "../../../components/form";
 import { Button } from "../../../components/Button";
 import { LoadingIcon } from "../../../components/icons";
 import { NoteStatus } from "../../../types";
@@ -32,9 +32,9 @@ type LoaderData = {
 
 export const Form = (props: FormProps) => {
     const { t } = useTranslation("pages/add-note");
-    const { sources } = useLoaderData() as LoaderData;
+    const { sources, tags } = useLoaderData() as LoaderData;
     const [isShowSource, setIsShowSource] = useState(false);
-
+    
     const schema = yup
         .object({
             position: yup
@@ -147,7 +147,6 @@ export const Form = (props: FormProps) => {
                 control={control}
                 render={({ field }) => (
                     <Select
-                        size="big"
                         onChange={(e) => {
                             setIsShowSource(e.target.value === "other");
                             field.onChange(e);
@@ -166,6 +165,27 @@ export const Form = (props: FormProps) => {
                             })),
                             { label: t("other"), value: "other" },
                         ]}
+                    />
+                )}
+            />
+
+            <Controller
+                name="tags"
+                control={control}
+                render={({ field }) => (
+                    <Autocomplete
+                        onChange={field.onChange}
+                        name={field.name}
+                        value={field.value || []}
+                        error={!!errors.tags}
+                        helperText={
+                            errors.tags ? errors.tags?.message : null
+                        }
+                        placeholder={t("fields.tags")}
+                        options={tags.map((tag) => ({
+                            label: tag.tag || "",
+                            value: tag.tag || "",
+                        }))}
                     />
                 )}
             />
