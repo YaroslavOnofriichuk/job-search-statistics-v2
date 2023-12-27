@@ -8,6 +8,7 @@ import {
     GET_CALENDAR_NOTES,
     GET_SOURCES_STATISTIC,
     GET_STATUS_STATISTIC,
+    GET_TAGS,
 } from "../../graphql";
 import { Layout } from "../../layout";
 import { useTranslation } from "react-i18next";
@@ -32,8 +33,9 @@ export function EditNotePage() {
     const { note } = useLoaderData() as LoaderData;
     const [updateNote, { data, error }] = useMutation(UPDATE_NOTE, {
         refetchQueries: [
-            GET_NOTES,
             GET_STATUSES_HISTORY,
+            GET_NOTES,
+            GET_TAGS,
             GET_CALENDAR_NOTES,
             GET_SOURCES_STATISTIC,
             GET_STATUS_STATISTIC,
@@ -44,6 +46,7 @@ export function EditNotePage() {
         {
             refetchQueries: [
                 GET_NOTES,
+                GET_TAGS,
                 GET_CALENDAR_NOTES,
                 GET_SOURCES_STATISTIC,
                 GET_STATUS_STATISTIC,
