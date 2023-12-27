@@ -33,6 +33,7 @@ export class NotesService {
       status: dto.status,
       userId,
       sourceId: source.id,
+      createdAt: dto.createdAt,
     });
 
     if (dto.tags?.length > 0) {
