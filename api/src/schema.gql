@@ -123,7 +123,7 @@ type NoteStatusHistory {
 type Query {
   notes(getNotesArgs: GetNotesArgs!): NotesPaginationResponse!
   note(id: Int!): Note!
-  statusStatistic: NoteStatusStatisticResponse!
+  statusStatistic(tags: [String!]!): NoteStatusStatisticResponse!
   sources: [NoteSource!]!
   sourcesStatistic: [NoteSourceStatisticResponse!]!
   tags: [Tag!]!

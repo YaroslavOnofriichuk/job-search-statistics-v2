@@ -54,7 +54,10 @@ export class NotesResolver {
   }
 
   @Query(() => NoteStatusStatisticResponse, { name: 'statusStatistic' })
-  getStatistic(@CurrentUser() user: User) {
-    return this.notesService.getStatistic(user.id);
+  getStatistic(
+    @Args('tags', { type: () => [String] }) tags: string[],
+    @CurrentUser() user: User
+  ) {
+    return this.notesService.getStatistic(user.id, tags);
   }
 }

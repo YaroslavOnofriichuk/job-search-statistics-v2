@@ -45,4 +45,44 @@ export const Wrapper = styled.div`
             margin-bottom: 10px;
         }
     }
+
+    .pie {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        & ul {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            width: 100%;
+            margin: 0 auto 20px auto;
+            padding: 0;
+
+            & li {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+            }
+
+            & button {
+                transition: 0.5s;
+                color: ${({ theme }) => theme.colors.text.primary};
+                border: none;
+                outline: none;
+                cursor: pointer;
+                background: transparent;
+                padding: 3px;
+
+                &:hover,
+                &:focus {
+                    color: ${({ theme }) => theme.colors.text.secondary};
+                }
+            }
+
+            .pie-active-tag {
+                color: ${({ theme }) => theme.colors.text.accent};
+            }
+        }
+    }
 `;

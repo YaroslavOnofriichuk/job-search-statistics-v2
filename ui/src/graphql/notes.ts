@@ -156,8 +156,8 @@ export const GET_CALENDAR_NOTES = gql`
 `;
 
 export const GET_STATUS_STATISTIC = gql`
-    query GetStatusStatistic {
-        statusStatistic {
+    query GetStatusStatistic($tags: [String!]!) {
+        statusStatistic(tags: $tags) {
             ALL
             ACCEPTED
             REJECTED

@@ -124,6 +124,27 @@ export const Form = (props: FormProps) => {
             />
 
             <Controller
+                name="tags"
+                control={control}
+                render={({ field }) => (
+                    <Autocomplete
+                        onChange={field.onChange}
+                        name={field.name}
+                        value={field.value || []}
+                        error={!!errors.tags}
+                        helperText={
+                            errors.tags ? errors.tags?.message : null
+                        }
+                        placeholder={t("fields.tags")}
+                        options={tags.map((tag) => ({
+                            label: tag.tag || "",
+                            value: tag.tag || "",
+                        }))}
+                    />
+                )}
+            />
+
+            <Controller
                 name="link"
                 control={control}
                 render={({ field }) => (
@@ -165,27 +186,6 @@ export const Form = (props: FormProps) => {
                             })),
                             { label: t("other"), value: "other" },
                         ]}
-                    />
-                )}
-            />
-
-            <Controller
-                name="tags"
-                control={control}
-                render={({ field }) => (
-                    <Autocomplete
-                        onChange={field.onChange}
-                        name={field.name}
-                        value={field.value || []}
-                        error={!!errors.tags}
-                        helperText={
-                            errors.tags ? errors.tags?.message : null
-                        }
-                        placeholder={t("fields.tags")}
-                        options={tags.map((tag) => ({
-                            label: tag.tag || "",
-                            value: tag.tag || "",
-                        }))}
                     />
                 )}
             />

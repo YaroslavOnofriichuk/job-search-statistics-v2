@@ -15,7 +15,7 @@ import { ButtonLink } from "../../components/LinkButton";
 import { Suspense, useEffect } from "react";
 import { useMutation } from "@apollo/client";
 import { useToast } from "../../hooks";
-import { Await, Params, useLoaderData, useNavigate } from "react-router-dom";
+import { Await, Params, defer, useLoaderData, useNavigate } from "react-router-dom";
 import { Loader } from "../../components/Loader";
 import type { Note, StatusHistory } from "../../types";
 import { TimeLine } from "./TimeLine";
@@ -128,8 +128,8 @@ export const editNoteLoader = async ({ params }: { params: Params }) => {
         variables: { noteId: Number(params.id) },
     });
 
-    return {
+    return defer({
         note: note?.data?.note,
         history,
-    };
+    });
 };

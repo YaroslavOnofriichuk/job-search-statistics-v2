@@ -192,19 +192,25 @@ export class NotesService {
     }
   }
 
-  async getStatistic(userId: number) {
+  async getStatistic(userId: number, tags: string[]) {
     const qb = this.notesRepository
       .createQueryBuilder('note')
-      .select('COUNT(*)', 'ALL')
+
+    if (tags.length > 0) {
+      qb.leftJoinAndSelect('note.tags', 'noteTag')
+        .leftJoinAndSelect('noteTag.tag', 'tag') 
+        .select(`COUNT(*) FILTER (WHERE tag.tag IN (${tags.map(tag => `'${tag}'`).join(", ")}))`, 'ALL')
+    } else {
+      qb.select('COUNT(*)', 'ALL')
+    }
 
     Object.values(NoteStatus).forEach(status => {
-      qb.addSelect(`COUNT(*) FILTER (WHERE note.status = '${status}')`, status);
+      const statusFilter = tags.length > 0
+      ? `tag.tag IN (${tags.map(tag => `'${tag}'`).join(", ")}) AND note.status = '${status}'`
+      : `note.status = '${status}'`;
+      qb.addSelect(`COUNT(*) FILTER (WHERE ${statusFilter})`, status);
     });
 
-    const result = await qb
-      .where('note.userId = :userId', { userId })
-      .getRawOne()
-
-    return result
+    return await qb.where('note.userId = :userId', { userId }).getRawOne();
   }
 }
