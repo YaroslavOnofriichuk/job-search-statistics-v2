@@ -110,7 +110,6 @@ export const Info = (props: InfoProps) => {
                         control={control}
                         render={({ field }) => (
                             <Select
-                                size="big"
                                 onChange={field.onChange}
                                 name={field.name}
                                 value={field.value || ""}
