@@ -17,10 +17,6 @@ export const router = createBrowserRouter([
                 element: <PrivateRoute />,
                 children: [
                     {
-                        path: "home",
-                        lazy: () => import("../pages/HomePage"),
-                    },
-                    {
                         path: "notes",
                         async lazy() {
                             const { notesLoader, NotesPage } = await import(
@@ -71,6 +67,44 @@ export const router = createBrowserRouter([
                     {
                         path: "statistic",
                         lazy: () => import("../pages/StatisticPage"),
+                        children: [
+                            {
+                                path: "source",
+                                async lazy() {
+                                    const { sourcesLoader, SourcesPage } = await import(
+                                      "../pages/StatisticPage/Sources"
+                                    );
+                                    return {
+                                      loader: sourcesLoader,
+                                      Component: SourcesPage,
+                                    };
+                                },
+                            },
+                            {
+                                path: "feedback",
+                                async lazy() {
+                                    const { feedbackLoader, FeedbackPage } = await import(
+                                      "../pages/StatisticPage/Feedback"
+                                    );
+                                    return {
+                                      loader: feedbackLoader,
+                                      Component: FeedbackPage,
+                                    };
+                                },
+                            },
+                            {
+                                path: "dynamics",
+                                async lazy() {
+                                    const { dynamicsLoader, DynamicsPage } = await import(
+                                      "../pages/StatisticPage/Dynamics"
+                                    );
+                                    return {
+                                      loader: dynamicsLoader,
+                                      Component: DynamicsPage,
+                                    };
+                                },
+                            }
+                        ],
                     },
                 ],
             },

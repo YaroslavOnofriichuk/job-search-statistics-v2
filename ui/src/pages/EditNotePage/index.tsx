@@ -6,6 +6,8 @@ import {
     GET_NOTES,
     DELETE_NOTE,
     GET_CALENDAR_NOTES,
+    GET_SOURCES_STATISTIC,
+    GET_STATUS_STATISTIC,
 } from "../../graphql";
 import { Layout } from "../../layout";
 import { useTranslation } from "react-i18next";
@@ -13,7 +15,7 @@ import { ButtonLink } from "../../components/LinkButton";
 import { Suspense, useEffect } from "react";
 import { useMutation } from "@apollo/client";
 import { useToast } from "../../hooks";
-import { Await, Params, useLoaderData, useNavigate } from "react-router-dom";
+import { Await, Params, defer, useLoaderData, useNavigate } from "react-router-dom";
 import { Loader } from "../../components/Loader";
 import type { Note, StatusHistory } from "../../types";
 import { TimeLine } from "./TimeLine";
@@ -29,11 +31,25 @@ export function EditNotePage() {
     const { t } = useTranslation("pages/edit-note");
     const { note } = useLoaderData() as LoaderData;
     const [updateNote, { data, error }] = useMutation(UPDATE_NOTE, {
-        refetchQueries: [GET_NOTES, GET_STATUSES_HISTORY, GET_CALENDAR_NOTES],
+        refetchQueries: [
+            GET_NOTES,
+            GET_STATUSES_HISTORY,
+            GET_CALENDAR_NOTES,
+            GET_SOURCES_STATISTIC,
+            GET_STATUS_STATISTIC,
+        ],
     });
-    const [removeNote, { data: deleteData, error: deleteError }] = useMutation(DELETE_NOTE, {
-        refetchQueries: [GET_NOTES, GET_CALENDAR_NOTES],
-    });
+    const [removeNote, { data: deleteData, error: deleteError }] = useMutation(
+        DELETE_NOTE,
+        {
+            refetchQueries: [
+                GET_NOTES,
+                GET_CALENDAR_NOTES,
+                GET_SOURCES_STATISTIC,
+                GET_STATUS_STATISTIC,
+            ],
+        }
+    );
     const { addToast } = useToast();
     const navigate = useNavigate();
 
@@ -89,7 +105,7 @@ export function EditNotePage() {
                     children={
                         <Wrapper>
                             <div className="edit-left-side">
-                                <Info onSubmit={onSubmit} onDelete={onDelete}/>
+                                <Info onSubmit={onSubmit} onDelete={onDelete} />
                             </div>
                             <div className="edit-right-side">
                                 <TimeLine />
@@ -112,8 +128,8 @@ export const editNoteLoader = async ({ params }: { params: Params }) => {
         variables: { noteId: Number(params.id) },
     });
 
-    return {
+    return defer({
         note: note?.data?.note,
         history,
-    };
+    });
 };

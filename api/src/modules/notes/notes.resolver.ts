@@ -5,6 +5,7 @@ import { CreateNoteInput } from './dto/create-note.input';
 import { UpdateNoteInput } from './dto/update-note.input';
 import { GetNotesArgs } from './dto/get-notes.args';
 import { NotesPaginationResponse } from './response/notes-pagination.response';
+import { NoteStatusStatisticResponse } from './response/note-status-statistic.response';
 import { CurrentUser } from '../auth/auth.decorators';
 import { User } from '../../entities/user/user.entity';
 
@@ -50,5 +51,13 @@ export class NotesResolver {
     @CurrentUser() user: User
   ) {
     return this.notesService.remove(id, user.id);
+  }
+
+  @Query(() => NoteStatusStatisticResponse, { name: 'statusStatistic' })
+  getStatistic(
+    @Args('tags', { type: () => [String] }) tags: string[],
+    @CurrentUser() user: User
+  ) {
+    return this.notesService.getStatistic(user.id, tags);
   }
 }
