@@ -22,6 +22,13 @@ export const Wrapper = styled.div`
         margin-bottom: 20px;
     }
 
+    .auth-right-side {
+        width: 100%;
+        height: 100%;
+        border-radius: 37px;
+        background-color: ${({ theme }) => theme.colors.body.secondary};
+    }
+
     .auth-title {
         margin-bottom: 10px;
     }
