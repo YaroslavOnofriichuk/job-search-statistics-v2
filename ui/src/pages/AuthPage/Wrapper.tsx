@@ -27,6 +27,7 @@ export const Wrapper = styled.div`
         height: 100%;
         border-radius: 37px;
         background-color: ${({ theme }) => theme.colors.body.secondary};
+        overflow: hidden;
     }
 
     .auth-title {

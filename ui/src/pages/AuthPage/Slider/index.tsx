@@ -1,24 +1,28 @@
 import { useEffect, useState, useRef } from "react";
 import { Slider as SliderStyled } from "./Slider";
+import { useTranslation } from "react-i18next";
+import { useTheme } from "styled-components";
+
+const slides = ["create", "list", "edit", "cal", "stat"];
 
 export const Slider = () => {
     const [activeSlide, setActiveSlide] = useState(1);
     const [slideWidth, setSlideWidth] = useState(1);
     const ref = useRef<HTMLDivElement>(null);
-    const baseUrl = import.meta.env.VITE_API_HOST + "/";
+    const { t, i18n } = useTranslation("pages/auth");
+    const { mode } = useTheme();
+    const baseUrl = import.meta.env.VITE_API_HOST;
 
     const move = () => {
-        console.log("MOVE");
-        setActiveSlide((prevSlide) => (prevSlide > 4 ? 1 : prevSlide + 1));
+        setActiveSlide((prevSlide) => (prevSlide >= slides.length ? 1 : prevSlide + 1));
     };
 
     const handleResize = () => {
-        console.log("RESIZE");
         setSlideWidth(ref.current?.offsetWidth || 1);
     };
 
     useEffect(() => {
-        const interval = setInterval(move, 3000);
+        const interval = setInterval(move, 5000);
         window.addEventListener("resize", handleResize);
         handleResize();
         return () => {
@@ -29,91 +33,54 @@ export const Slider = () => {
 
     return (
         <SliderStyled ref={ref}>
-            {/* <li>
-                <picture>
-                    <source
-                        media="(min-width: 1170px)"
-                        srcSet={baseUrl + "desc-dark-eng-create.webp"}
-                        type="image/webp"
-                    />
-                    <source
-                        media="(min-width: 1170px)"
-                        srcSet={baseUrl + "desc-dark-eng-create.jpg"}
-                    />
-
-                    <source
-                        media="(min-width: 200px)"
-                        srcSet={baseUrl + "mob-dark-eng-create.webp"}
-                        type="image/webp"
-                    />
-                    <source
-                        media="(min-width: 200px)"
-                        srcSet={baseUrl + "mob-dark-eng-create.jpg"}
-                    />
-                    <img src="#" alt="create image" />
-                </picture>
-            </li> */}
-
             <ul
                 className="slider-inner"
                 style={{
-                    width: slideWidth * 5,
-                    transform: `translateX(-${slideWidth * activeSlide}px)`,
+                    width: slideWidth * slides.length,
+                    transform: `translateX(-${slideWidth * activeSlide}px) translateZ(0)`,
                 }}
             >
-                <li
-                    className={activeSlide === 1 ? "active slide" : "slide"}
-                    style={{ width: slideWidth }}
-                >
-                    1
-                </li>
-                <li
-                    className={activeSlide === 2 ? "active slide" : "slide"}
-                    style={{ width: slideWidth }}
-                >
-                    2
-                </li>
-                <li
-                    className={activeSlide === 3 ? "active slide" : "slide"}
-                    style={{ width: slideWidth }}
-                >
-                    3
-                </li>
-                <li
-                    className={activeSlide === 4 ? "active slide" : "slide"}
-                    style={{ width: slideWidth }}
-                >
-                    4
-                </li>
-                <li
-                    className={activeSlide === 5 ? "active slide" : "slide"}
-                    style={{ width: slideWidth }}
-                >
-                    5
-                </li>
+                {slides.map((slide, index) => (
+                    <li
+                        key={slide}
+                        className={activeSlide === index + 1 ? "active slide" : "slide"}
+                        style={{ width: slideWidth, left: slideWidth * (index + 1) }}
+                    >
+                        <picture>
+                            <source
+                                media="(min-width: 767px)"
+                                srcSet={`${baseUrl}/desc-${mode}-${i18n.language}-${slide}.webp`}
+                                type="image/webp"
+                            />
+                            <source
+                                media="(min-width: 767px)"
+                                srcSet={`${baseUrl}/desc-${mode}-${i18n.language}-${slide}.jpg`}
+                            />
+
+                            <source
+                                media="(min-width: 200px)"
+                                srcSet={`${baseUrl}/mob-${mode}-${i18n.language}-${slide}.webp`}
+                                type="image/webp"
+                            />
+                            <source
+                                media="(min-width: 200px)"
+                                srcSet={`${baseUrl}/mob-${mode}-${i18n.language}-${slide}.jpg`}
+                            />
+                            <img src="#" alt={"image " + slide} width={slideWidth}/>
+                        </picture>
+                        <div><p>{t(`slides.${slide}`)}</p></div>
+                    </li>
+                ))}
             </ul>
 
             <ul className="slider-nav">
-                <li
-                    className={activeSlide === 1 ? "active" : ""}
-                    onClick={() => setActiveSlide(1)}
-                ></li>
-                <li
-                    className={activeSlide === 2 ? "active" : ""}
-                    onClick={() => setActiveSlide(2)}
-                ></li>
-                <li
-                    className={activeSlide === 3 ? "active" : ""}
-                    onClick={() => setActiveSlide(3)}
-                ></li>
-                <li
-                    className={activeSlide === 4 ? "active" : ""}
-                    onClick={() => setActiveSlide(4)}
-                ></li>
-                <li
-                    className={activeSlide === 5 ? "active" : ""}
-                    onClick={() => setActiveSlide(5)}
-                ></li>
+                {slides.map((slide, index) => (
+                    <li
+                        key={slide}
+                        className={activeSlide === index + 1 ? "active" : ""}
+                        onClick={() => setActiveSlide(index + 1)}
+                    ></li>
+                ))}
             </ul>
         </SliderStyled>
     );
