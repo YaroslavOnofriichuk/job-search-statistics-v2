@@ -12,6 +12,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { SourcesModule } from './modules/sources/sources.module';
 import { TagsModule } from './modules/tags/tags.module';
 import { StatusesHistoryModule } from './modules/statuses-history/statuses-history.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
 
 @Module({
   imports: [
@@ -27,6 +28,10 @@ import { StatusesHistoryModule } from './modules/statuses-history/statuses-histo
       driver: ApolloDriver,
       playground: true,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'public'),
+      // serveRoot: '/dist',
     }),
 
     NotesModule,

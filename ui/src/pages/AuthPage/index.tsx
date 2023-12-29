@@ -3,6 +3,7 @@ import { useMatch, Outlet } from "react-router-dom";
 import { Layout } from "../../layout";
 import { Wrapper } from "./Wrapper";
 import { TabLink } from "../../components/TabLink";
+import { Slider } from "./Slider";
 
 export const AuthPage = () => {
     const { t } = useTranslation("pages/auth");
@@ -27,7 +28,9 @@ export const AuthPage = () => {
                     <Outlet />
                 </div>
 
-                <div className="auth-right-side"></div>
+                <div className="auth-right-side">
+                    <Slider />
+                </div>
             </Wrapper>
         </Layout>
     );
