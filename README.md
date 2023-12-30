@@ -11,7 +11,7 @@ An application for keeping statistics when looking for a job.
 
 <p>
 Technologies: React, Vite, styled-components, TypeScript, GraphQL/Apollo Client, zustand,
-Node.js/NestJS, PostgreSQL/TypeORM.
+Node.js/NestJS, passport, PostgreSQL/TypeORM.
 </p>
 
 <ol>
@@ -36,3 +36,5 @@ Node.js/NestJS, PostgreSQL/TypeORM.
         <img alt="statistic image" src="https://github.com/YaroslavOnofriichuk/job-search-statistics-v2/blob/main/api/public/desc-dark-eng-stat.jpg"/>
     </li>
 </ol>
+
+<p>Good luck in finding your dream job!!!</p>
