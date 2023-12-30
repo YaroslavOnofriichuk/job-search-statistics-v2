@@ -1,9 +1,9 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
-import dotenv from 'dotenv'
+import { config } from 'dotenv';
 
-dotenv.config()
+config({ path: '.env' });
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -13,6 +13,6 @@ async function bootstrap() {
     methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE", "OPTIONS"],
     credentials: true,
   });
-  await app.listen(process.env.API_PORT);
+  await app.listen(process.env.API_PORT || 3000);
 }
 bootstrap();
