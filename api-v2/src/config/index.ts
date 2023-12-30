@@ -1,1 +1,0 @@
-export { dbConf } from './database';
