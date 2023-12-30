@@ -1,7 +1,7 @@
 
 <h1 align="center">
 <a href="https://job-search-statistic.netlify.app/" target="_blank">
- Website
+ App url
 </a>
 </h1>
 
