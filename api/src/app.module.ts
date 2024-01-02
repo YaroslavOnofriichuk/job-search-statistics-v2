@@ -4,6 +4,7 @@ import { dbConf } from './config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './modules/auth/jwt-auth.guard';
@@ -12,9 +13,6 @@ import { AuthModule } from './modules/auth/auth.module';
 import { SourcesModule } from './modules/sources/sources.module';
 import { TagsModule } from './modules/tags/tags.module';
 import { StatusesHistoryModule } from './modules/statuses-history/statuses-history.module';
-import { TasksModule } from './modules/tasks/tasks.module';
-import { ServeStaticModule } from '@nestjs/serve-static';
-import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
@@ -34,14 +32,12 @@ import { ScheduleModule } from '@nestjs/schedule';
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'public'),
     }),
-    ScheduleModule.forRoot(),
 
     NotesModule,
     AuthModule,
     SourcesModule,
     TagsModule,
     StatusesHistoryModule,
-    TasksModule,
   ],
   providers: [
     {

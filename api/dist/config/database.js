@@ -4,6 +4,8 @@ exports.dataSource = exports.dbConf = void 0;
 const config_1 = require("@nestjs/config");
 const typeorm_1 = require("typeorm");
 const dotenv_1 = require("dotenv");
+const fs_1 = require("fs");
+const path_1 = require("path");
 (0, dotenv_1.config)({ path: '.env' });
 const config = {
     type: 'postgres',
@@ -24,8 +26,8 @@ const config = {
     logging: true,
     ssl: {
         rejectUnauthorized: true,
-        ca: process.env.DB_CA,
-    }
+        ca: (0, fs_1.readFileSync)((0, path_1.join)(__dirname, 'ca.pem')).toString(),
+    },
 };
 exports.dbConf = (0, config_1.registerAs)('typeorm', () => config);
 exports.dataSource = new typeorm_1.DataSource(config);
