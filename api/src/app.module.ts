@@ -12,7 +12,9 @@ import { AuthModule } from './modules/auth/auth.module';
 import { SourcesModule } from './modules/sources/sources.module';
 import { TagsModule } from './modules/tags/tags.module';
 import { StatusesHistoryModule } from './modules/statuses-history/statuses-history.module';
+import { TasksModule } from './modules/tasks/tasks.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
@@ -32,12 +34,14 @@ import { ServeStaticModule } from '@nestjs/serve-static';
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'public'),
     }),
+    ScheduleModule.forRoot(),
 
     NotesModule,
     AuthModule,
     SourcesModule,
     TagsModule,
     StatusesHistoryModule,
+    TasksModule,
   ],
   providers: [
     {

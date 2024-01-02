@@ -99,7 +99,7 @@ export const Form = (props: FormProps) => {
                         helperText={
                             errors.position ? errors.position?.message : null
                         }
-                        placeholder={t("fields.position")}
+                        placeholder={t("fields.position") + " *"}
                     />
                 )}
             />
@@ -118,7 +118,7 @@ export const Form = (props: FormProps) => {
                         helperText={
                             errors.company ? errors.company?.message : null
                         }
-                        placeholder={t("fields.company")}
+                        placeholder={t("fields.company") + " *"}
                     />
                 )}
             />
@@ -158,7 +158,7 @@ export const Form = (props: FormProps) => {
                         helperText={
                             errors.link ? errors.link?.message : null
                         }
-                        placeholder={t("fields.link")}
+                        placeholder={t("fields.link") + " *"}
                     />
                 )}
             />
@@ -178,7 +178,7 @@ export const Form = (props: FormProps) => {
                         helperText={
                             errors.source ? errors.source?.message : null
                         }
-                        placeholder={t("fields.source")}
+                        placeholder={t("fields.source") + " *"}
                         options={[
                             ...sources.map((source) => ({
                                 label: source.name || "",
@@ -204,7 +204,7 @@ export const Form = (props: FormProps) => {
                         helperText={
                             errors.source ? errors.source?.message : null
                         }
-                        placeholder={t("fields.source")}
+                        placeholder={t("fields.source") + " *"}
                     />
                 )}
             />}

@@ -43,7 +43,7 @@ export const Form = (props: FormProps) => {
                     value={field.value}
                     error={!!errors.email}
                     helperText={errors.email ? errors.email?.message : null}
-                    placeholder={t("fields.email")}
+                    placeholder={t("fields.email") + " *"}
                 />
             )}
         />
@@ -60,7 +60,7 @@ export const Form = (props: FormProps) => {
                     value={field.value}
                     error={!!errors.password}
                     helperText={errors.password ? errors.password?.message : null}
-                    placeholder={t("fields.password")}
+                    placeholder={t("fields.password") + " *"}
                 />
             )}
         />

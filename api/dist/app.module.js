@@ -21,7 +21,9 @@ const auth_module_1 = require("./modules/auth/auth.module");
 const sources_module_1 = require("./modules/sources/sources.module");
 const tags_module_1 = require("./modules/tags/tags.module");
 const statuses_history_module_1 = require("./modules/statuses-history/statuses-history.module");
+const tasks_module_1 = require("./modules/tasks/tasks.module");
 const serve_static_1 = require("@nestjs/serve-static");
+const schedule_1 = require("@nestjs/schedule");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -44,11 +46,13 @@ exports.AppModule = AppModule = __decorate([
             serve_static_1.ServeStaticModule.forRoot({
                 rootPath: (0, path_1.join)(__dirname, '..', 'public'),
             }),
+            schedule_1.ScheduleModule.forRoot(),
             notes_module_1.NotesModule,
             auth_module_1.AuthModule,
             sources_module_1.SourcesModule,
             tags_module_1.TagsModule,
             statuses_history_module_1.StatusesHistoryModule,
+            tasks_module_1.TasksModule,
         ],
         providers: [
             {

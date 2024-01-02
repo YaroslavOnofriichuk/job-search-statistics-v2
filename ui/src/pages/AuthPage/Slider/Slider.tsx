@@ -42,7 +42,7 @@ export const Slider = styled.div`
 
             & p {
                 max-width: 100%;
-                color: ${({ theme }) => theme.colors.text.accent};
+                color: ${({ theme }) => theme.colors.text.error};
             }
         }
 
@@ -66,7 +66,7 @@ export const Slider = styled.div`
             float: left;
             width: 10px;
             height: 10px;
-            border: 1px solid ${({ theme }) => theme.colors.text.accent};
+            border: 1px solid ${({ theme }) => theme.colors.text.error};
             z-index: 2;
             display: inline-block;
             margin: 0 10px;
@@ -82,7 +82,7 @@ export const Slider = styled.div`
             }
 
             &.active {
-                background-color: ${({ theme }) => theme.colors.text.accent};
+                background-color: ${({ theme }) => theme.colors.text.error};
                 transform: scale(2);
                 opacity: 1;
             }
