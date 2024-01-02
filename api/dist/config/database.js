@@ -22,6 +22,10 @@ const config = {
     synchronize: false,
     migrationsRun: true,
     logging: true,
+    ssl: {
+        rejectUnauthorized: true,
+        ca: process.env.DB_CA,
+    }
 };
 exports.dbConf = (0, config_1.registerAs)('typeorm', () => config);
 exports.dataSource = new typeorm_1.DataSource(config);

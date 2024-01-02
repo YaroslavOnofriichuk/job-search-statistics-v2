@@ -16,6 +16,10 @@ export declare const dbConf: (() => {
     synchronize: boolean;
     migrationsRun: boolean;
     logging: boolean;
+    ssl: {
+        rejectUnauthorized: boolean;
+        ca: string;
+    };
 }) & import("@nestjs/config").ConfigFactoryKeyHost<{
     type: string;
     host: string;
@@ -33,5 +37,9 @@ export declare const dbConf: (() => {
     synchronize: boolean;
     migrationsRun: boolean;
     logging: boolean;
+    ssl: {
+        rejectUnauthorized: boolean;
+        ca: string;
+    };
 }>;
 export declare const dataSource: DataSource;

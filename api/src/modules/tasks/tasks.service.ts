@@ -5,7 +5,7 @@ import { Interval } from '@nestjs/schedule';
 export class TasksService {
   private readonly logger = new Logger(TasksService.name);
 
-  @Interval(1000 * 60 * 15)
+  @Interval(1000 * 60 * 5)
   handleInterval() {
     this.logger.debug('I am alive');
   }
