@@ -21,10 +21,6 @@ const config = {
   synchronize: false,
   migrationsRun: true,
   logging: true,
-  ssl: {
-    rejectUnauthorized: true,
-    ca: process.env.DB_CA,
-  }
 }
 
 export const dbConf = registerAs('typeorm', () => config)
